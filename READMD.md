@@ -1,5 +1,0 @@
-vdevops
-
-www.vdevops.com
-
-
