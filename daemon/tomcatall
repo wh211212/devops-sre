@@ -8,19 +8,21 @@
 
 # tomcat name
 TOMCAT_PORT=$1
-TOMCAT=${TOMCAT_PORT}_$1
-TOMCAT_BIN=${TOMCAT}/bin
+TOMCAT=tomcat_$1
 TOMCAT_HOME=/data/tomcats/${TOMCAT}
+TOMCAT_BIN=${TOMCAT_HOME}/bin
 #TOMCAT_LOG=${TOMCAT_HOME/logs/catalina.$(date +%Y-%m-%d).out
-TOMCAT_LOG=${TOMCAT_HOME/logs/catalina.out
+TOMCAT_LOG=${TOMCAT_HOME}/logs/catalina.out
 
 #
 # source function library.  
 . /etc/rc.d/init.d/functions
 
-if [ ! -f ${TOMCAT_BIN}/catalina.sh ];then
-     echo "${TOMCAT} not valilable !!!"  
-     exit
+if [ -f ${TOMCAT_BIN}/catalina.sh ];then
+       echo "${TOMCAT} is valilable !!!"  
+     else
+       echo "${TOMCAT} not valilable !!!"
+       exit
 fi
 
 RETVAL=$?  
@@ -29,7 +31,7 @@ start(){
         checkrun
         if [ $RETVAL -eq 0 ]; then  
                 echo "-- Starting ${TOMCAT}... --"  
-                bash ${TOMCAT}/bin/startup.sh  
+                bash ${TOMCAT_BIN}/startup.sh  
                 touch /var/lock/subsys/${TOMCAT_PORT}
                 checklog 
                 status
@@ -43,7 +45,7 @@ stop(){
         checkrun  
         if [ $RETVAL -eq 1 ]; then  
                 echo "-- Shutting down tomcat..."  
-                ${TOMCAT}/bin/shutdown.sh  
+                ${TOMCAT_BIN}/shutdown.sh  
                 if [ "$1" != "re" ]; then
         checklog
                 else
@@ -93,8 +95,8 @@ kill(){
      }   
 
 checkrun(){  
-           ps ax --width=1000 |grep ${TOMCAT_PORT}| grep "[o]rg.apache.catalina.startup.Bootstrap start" | awk '{printf $1 "\n"}' | wc -l |  > /var/run/tomcat_process_count
-           read line < /car/run/tomcat_process_count 
+           ps ax --width=1000 |grep ${TOMCAT_PORT}| grep "[o]rg.apache.catalina.startup.Bootstrap start" | awk '{printf $1 "\n"}' | wc -l > /var/run/tomcat_process_count
+           read line < /var/run/tomcat_process_count 
            if [ $line -gt 0 ]; then  
                   RETVAL=1  
                   return $RETVAL  
@@ -121,8 +123,8 @@ checklog(){
           }
 
 checkexist(){
-             if [ ! -d ${TOMCAT} ]; then
-                 echo "-- ${TOMCAT} does not exist."
+             if [ ! -d ${TOMCAT_HOME} ]; then
+                 echo "-- ${TOMCAT_HOME} does not exist."
                  exit 0
              fi
             }      

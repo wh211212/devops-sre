@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# the following is the LSB init header
+#
+### BEGIN INIT INFO
+# Provides: netcf-transaction
+# Required-Start: $local_fs
+# Default-Start: 2 3 4 5
+# Short-Description: save/restore network configuration files
+# Description: This script can save the current state of network config,
+#              and later revert to that config, or commit the new config
+#              (by deleting the snapshot). At boot time, if there are
+#              uncommitted changes to the network config, they are
+#              reverted (and the discarded changes are archived in
+#              /var/lib/netcf/network-rollback-*).
+#
+### END INIT INFO
+
+# the following is chkconfig init header
+#
+# netcf-transaction: save/restore current network interface configuration
+#
+# chkconfig:   - 09 91
+# description: This script can save the current state of network config, \
+#              and later revert to that config, or commit the new config \
+#              (by deleting the snapshot). At boot time, if there are \
+#              uncommitted changes to the network config, they are \
+#              reverted (and the discarded changes are archived in \
+#              /var/lib/netcf/network-rollback-*).
+
+exec /usr/libexec/netcf-transaction.sh "$@"

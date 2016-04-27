@@ -1,0 +1,156 @@
+#!/bin/bash
+#
+# xinetd        This starts and stops xinetd.
+#
+# chkconfig: 345 56 50
+# description: xinetd is a powerful replacement for inetd. \
+#	       xinetd has access control mechanisms, extensive \
+#              logging capabilities, the ability to make services \
+#              available based on time, and can place \
+#              limits on the number of servers that can be started, \
+#              among other things.
+#
+# processname: /usr/sbin/xinetd
+# config: /etc/sysconfig/network
+# config: /etc/xinetd.conf
+# pidfile: /var/run/xinetd.pid
+
+
+### BEGIN INIT INFO
+# Provides: 
+# Required-Start: $network
+# Required-Stop: 
+# Should-Start: 
+# Should-Stop: 
+# Default-Start: 3 4 5
+# Default-Stop: 0 1 2 6
+# Short-Description: start and stop xinetd
+# Description: xinetd is a powerful replacement for inetd. \
+#              xinetd has access control mechanisms, extensive \
+#              logging capabilities, the ability to make services \
+#              available based on time, and can place \
+#              limits on the number of servers that can be started, \
+#              among other things.
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/bin:/usr/sbin
+
+# Source function library.
+. /etc/init.d/functions
+
+# Get config.
+test -f /etc/sysconfig/network && . /etc/sysconfig/network
+
+# More config
+
+test -f /etc/sysconfig/xinetd && . /etc/sysconfig/xinetd
+
+RETVAL=0
+
+prog="xinetd"
+
+start(){
+    [ -f /usr/sbin/xinetd ] || exit 5
+    [ -f /etc/xinetd.conf ] || exit 6
+    # this is suitable way considering SELinux is guarding write 
+    # access to PID file
+	[ $EUID -eq 0 ] || exit 4
+
+    echo -n $"Starting $prog: "
+
+# Localization for xinetd is controlled in /etc/synconfig/xinetd
+    if [ -z "$XINETD_LANG" -o "$XINETD_LANG" = "none" -o "$XINETD_LANG" = "NONE" ]; then
+        unset LANG LC_TIME LC_ALL LC_MESSAGES LC_NUMERIC LC_MONETARY LC_COLLATE
+    else
+        LANG="$XINETD_LANG"
+        LC_TIME="$XINETD_LANG"
+        LC_ALL="$XINETD_LANG"
+        LC_MESSAGES="$XINETD_LANG"
+        LC_NUMERIC="$XINETD_LANG"
+        LC_MONETARY="$XINETD_LANG"
+        LC_COLLATE="$XINETD_LANG"
+        export LANG LC_TIME LC_ALL LC_MESSAGES LC_NUMERIC LC_MONETARY LC_COLLATE
+    fi
+    unset HOME MAIL USER USERNAME
+    daemon $prog -stayalive -pidfile /var/run/xinetd.pid "$EXTRAOPTIONS"
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/xinetd
+    return $RETVAL
+}
+
+stop(){
+    [ -f /usr/sbin/xinetd ] || exit 5
+    [ -f /etc/xinetd.conf ] || exit 6
+    # this is suitable way considering SELinux is guarding write 
+    # access to PID file
+	[ $EUID -eq 0 ] || exit 4
+
+    echo -n $"Stopping $prog: "
+    killproc -p /var/run/xinetd.pid $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/xinetd
+    return $RETVAL
+
+}
+
+reload(){
+    [ -f /usr/sbin/xinetd ] || exit 5
+    [ -f /etc/xinetd.conf ] || exit 6
+
+    echo -n $"Reloading configuration: "	
+    killproc $prog -HUP
+    RETVAL=$?
+    echo
+    return $RETVAL
+}
+
+restart(){
+    stop
+    start
+}
+
+condrestart(){
+    if [ -e /var/lock/subsys/xinetd ] ; then
+        restart
+        RETVAL=$?
+        return $RETVAL
+    fi
+    RETVAL=0
+    return $RETVAL
+}
+
+
+# See how we were called.
+case "$1" in
+    start)
+	start
+	RETVAL=$?
+	;;
+    stop)
+	stop
+	RETVAL=$?
+	;;
+    status)
+	status $prog
+	RETVAL=$?
+	;;
+    restart)
+	restart
+	RETVAL=$?
+	;;
+    reload|force-reload)
+	reload
+	RETVAL=$?
+	;;
+    condrestart|try-restart)
+	condrestart
+	RETVAL=$?
+	;;
+    *)
+	echo $"Usage: $0 {start|stop|status|restart|condrestart|reload}"
+	RETVAL=2
+esac
+
+exit $RETVAL

@@ -1,6 +1,6 @@
 #!/bin/bash
 #functions:deploy jdk tomcat env
-#date:2016-04-11
+#date:2016-04-22
 #Make sure only root can run our script
 #set -x
 RETVAL=0
@@ -15,7 +15,7 @@ RETVAL=0
 #wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b14/jdk-7u79-linux-x64.rpm
 #JAVA_OPTIONS
 JAVA_VERSION=1.7.0_79
-RETVAL=0
+#RETVAL=0
 wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b14/jdk-7u79-linux-x64.rpm
 
 if [ $RETVAL -eq 0 ];then
