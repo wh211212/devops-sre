@@ -12,7 +12,8 @@ RETVAL=0
 #wget http://apache.opencas.org/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
 #TOMCAT_OPTIONS
 TOMCAT_VERSION=apache-tomcat-7.0.69
-wget -P /usr/local/src wget http://apache.opencas.org/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
+#wget -P /usr/local/src wget http://apache.opencas.org/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
+wget -P /usr/local/src wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz 
 
 if [ $RETVAL -eq 0 ];then
      echo "wget tomcat succeed"
