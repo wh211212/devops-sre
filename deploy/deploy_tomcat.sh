@@ -19,6 +19,7 @@ if [ $RETVAL -eq 0 ];then
   else
      echo "wget tomcat failed"
      exit $RETVAL
+fi
 #
 cd /usr/local/src
 tar zxvf apache-tomcat-7.0.69.tar.gz -C /home/deploy/uncompression

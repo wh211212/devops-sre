@@ -16,14 +16,21 @@ RETVAL=0
 #JAVA_OPTIONS
 JAVA_VERSION=1.7.0_79
 #RETVAL=0
-wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b14/jdk-7u79-linux-x64.rpm
+pid=`ls -l /usr/local/src | grep jdk-7u79-linux-x64.rpm | grep -v grep | wc -l`
+if [ $pid -eq 1 ];then
+      echo "jdk-7u79-linux-x64.rpm is already exist"
+   else
+      wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b14/jdk-7u79-linux-x64.rpm -P /usr/local/src
+fi
 
 if [ $RETVAL -eq 0 ];then
      echo "wget java succeed"
   else
      echo "wget java failed"
      exit $RETVAL
+fi
 #
+cd /usr/local/src
 rpm -ivh jdk-7u79-linux-x64.rpm
 #
 cat > /etc/profile.d/jdk.sh << 'EOF'
