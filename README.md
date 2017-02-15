@@ -1,6 +1,22 @@
-# vdevops
+# itdevops
+> This tutorial focuses on DevOps resources and tools,Record IT work learning process.
 
-www.vdevops.com
+- 1. Technology tutorial
+- 2. Work record
+- 3. Personal notes
+
+
+## about devops
+
+- https://zh.wikipedia.org/wiki/DevOps
+- https://devops.com/
+
+## about me
+
+- www.vdevops.com
+- http://blog.csdn.net/wh211212
+- http://weibo.com/wh211212
+
 
 #kobe words
 No matter what , just do not give up .Always believe that your dream can come true & just keep working for what you want to achieve.
