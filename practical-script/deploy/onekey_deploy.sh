@@ -27,13 +27,15 @@ aniuapi(){
   echo "*** Begin onekey deploy aniu api service! ***"
   /bin/bash $mvn_script -i 
 
-  if [ $? -ne 0 ];then
+  if [ $? -eq 0 ];then
     echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
     /bin/bash $deploy_script -i   
     echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
     else 
     echo ""
-    echo " $Date Localhost Mvn deploy failed!" >> $onekey_deploy_log
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
     exit 0
   fi
 
@@ -56,227 +58,373 @@ aniuapi(){
 # onekey deploy wxapi
 wxapi(){
   echo "*** Begin onekey deploy wx api service! ***"
-  /bin/bash $mvn_script -i && /bin/bash $deploy_script -w
-  echo ""
+  /bin/bash $mvn_script -i 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　  wxapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy wxapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　  wxapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy wxapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -w 
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -i && /bin/bash $deploy_script -w
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　  wxapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy wxapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　  wxapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy wxapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy zjtapi
 zjtapi(){
   echo "*** Begin onekey deploy zjt api service! ***"
-  /bin/bash $mvn_script -i && /bin/bash $deploy_script -z
-  echo ""
+    /bin/bash $mvn_script -i 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　zjtapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy zjtapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　zjtapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy zjtapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -z  
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -i && /bin/bash $deploy_script -z
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　zjtapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy zjtapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　zjtapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy zjtapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy njdxapi
 njdxapi(){
   echo "*** Begin onekey deploy njdx api service! ***"
-  /bin/bash $mvn_script -i && /bin/bash $deploy_script -j
-  echo ""
+    /bin/bash $mvn_script -i 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　njdxapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy njdxapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　njdxapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy njdxapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -j   
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -i && /bin/bash $deploy_script -j
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　njdxapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy njdxapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　njdxapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy njdxapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy userapi
 userapi(){
   echo "*** Begin onekey deploy user api service! ***"
-  /bin/bash $mvn_script -i && /bin/bash $deploy_script -i
-  echo ""
+    /bin/bash $mvn_script -i 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　userapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy userapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　userapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy userapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -u 
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -i && /bin/bash $deploy_script -i
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　userapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy userapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　userapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy userapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy aniuadmin
 aniuadmin(){
   echo "*** Begin onekey deploy aniu admin service! ***"
-  /bin/bash $mvn_script -I && /bin/bash $deploy_script -I
-  echo ""
+  /bin/bash $mvn_script -I 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　aniuadmin onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy aniuadmin succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　aniuadmin onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy aniuadmin failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -I
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -I && /bin/bash $deploy_script -I
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　aniuadmin onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy aniuadmin succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　aniuadmin onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy aniuadmin failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy mmsadmin
 mmsadmin(){
   echo "*** Begin onekey deploy mmsadmin service! ***"
-  /bin/bash $mvn_script -M && /bin/bash $deploy_script -M
-  echo ""
+    /bin/bash $mvn_script -M 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　mmsadmin onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy mmsadmin succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　mmsadmin onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy mmsadmin failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -M
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -M && /bin/bash $deploy_script -M
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　mmsadmin onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy mmsadmin succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　mmsadmin onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy mmsadmin failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy adminicntv
 adminicntv(){
   echo "*** Begin onekey deploy icntv admin service! ***"
-  /bin/bash $mvn_script -N && /bin/bash $deploy_script -N
-  echo ""
+    /bin/bash $mvn_script -N
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　adminicntv onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy adminicntv succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　adminicntv onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy adminicntv failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -N
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -N && /bin/bash $deploy_script -N
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　adminicntv onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy adminicntv succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　adminicntv onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy adminicntv failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy crmadmin
 crmadmin(){
   echo "*** Begin onekey deploy crm admin service! ***"
-  /bin/bash $mvn_script -C && /bin/bash $deploy_script -C
-  echo ""
+      /bin/bash $mvn_script -C
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　crmadmin onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy crmadmin succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　crmadmin onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy crmadmin failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -C
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -C && /bin/bash $deploy_script -C
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　crmadmin onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy crmadmin succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　crmadmin onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy crmadmin failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy crmapi
 crmapi(){
   echo "*** Begin onekey deploy aniu api service! ***"
-  /bin/bash $mvn_script -c && /bin/bash $deploy_script -c
-  echo ""
+        /bin/bash $mvn_script -c 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　crmapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy crmapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　crmapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy crmapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -c
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -c && /bin/bash $deploy_script -c
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　crmapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy crmapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　crmapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy crmapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ######################################################################
 # onekey deploy aniuapi
 nkmapi(){
   echo "*** Begin onekey deploy niukeme api service! ***"
-  /bin/bash $mvn_script -k && /bin/bash $deploy_script -k
-  echo ""
+        /bin/bash $mvn_script -k
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　nkmapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy nkmapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　nkmapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy nkmapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -k
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -k && /bin/bash $deploy_script -k
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　nkmapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy nkmapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　nkmapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy nkmapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy nkmadmin
 nkmadmin(){
   echo "*** Begin onekey deploy aniu admin service! ***"
-  /bin/bash $mvn_script -K && /bin/bash $deploy_script -K
-  echo ""
+        /bin/bash $mvn_script -K 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　nkmadmin onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy nkmadmin succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　nkmadmin onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy nkmadmin failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -K
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+
+  # /bin/bash $mvn_script -K && /bin/bash $deploy_script -K
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　nkmadmin onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy nkmadmin succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　nkmadmin onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy nkmadmin failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 #
 ########################################################################
 # onekey deploy nkmtask
 nkmtask(){
   echo "*** Begin onekey deploy nkm api task service! ***"
-  /bin/bash $mvn_script -T && /bin/bash $deploy_script -T
-  echo ""
+  /bin/bash $mvn_script -T
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　nkmtask onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy nkmtask succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　nkmtask onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy nkmtask failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -T
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -T && /bin/bash $deploy_script -T
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　nkmtask onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy nkmtask succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　nkmtask onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy nkmtask failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy prodaductpi
 productapi(){
   echo "*** Begin onekey deploy product api service! ***"
-  /bin/bash $mvn_script -p 
+
+  /bin/bash $mvn_script -p
     if [ $? -ne 0 ];then
     echo ""
-    /bin/bash $deploy_script -p 
+    /bin/bash $deploy_script -p
     echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
     else 
     echo ""
@@ -302,145 +450,241 @@ productapi(){
 # onekey deploy productservice && aniuapy
 productservice(){
   echo "*** Begin onekey deploy aniu product service! ***"
-  /bin/bash $mvn_script -P && /bin/bash $deploy_script -P
-  echo ""
+        /bin/bash $mvn_script -P 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　productservice onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy productservice succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　productservice onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy productservice failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -P
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -P && /bin/bash $deploy_script -P
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　productservice onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy productservice succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　productservice onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy productservice failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy messagechannel
 messagechannel(){
   echo "*** Begin onekey deploy message channel service! ***"
-  /bin/bash $mvn_script -m && /bin/bash $deploy_script -m
-  echo ""
+        /bin/bash $mvn_script -m 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　messagechannel onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy messagechannel succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　messagechannel onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy messagechannel failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -m
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -m && /bin/bash $deploy_script -m
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　messagechannel onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy messagechannel succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　messagechannel onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy messagechannel failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy stockapi
 stockapi(){
   echo "*** Begin onekey deploy stock api service! ***"
-  /bin/bash $mvn_script -s && /bin/bash $deploy_script -s
-  echo ""
+        /bin/bash $mvn_script -s 
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　stockapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy stockapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　stockapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy stockapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -s
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -s && /bin/bash $deploy_script -s
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　stockapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy stockapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　stockapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy stockapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy algoquoteadmin
 algoquoteadmin(){
   echo "*** Begin onekey deploy algoquote admin service! ***"
-  /bin/bash $mvn_script -G && /bin/bash $deploy_script -G
-  echo ""
+  /bin/bash $mvn_script -G
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　algoquoteadmin onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy algoquoteadmin succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　algoquoteadmin onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy algoquoteadmin failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -G
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -G && /bin/bash $deploy_script -G
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　algoquoteadmin onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy algoquoteadmin succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　algoquoteadmin onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy algoquoteadmin failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy vcmsapi
 vcmsapi(){
   echo "*** Begin onekey deploy vcms api service! ***"
-  /bin/bash $mvn_script -v && /bin/bash $deploy_script -v
-  echo ""
+  /bin/bash $mvn_script -v
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　vcmsapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmsapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　vcmsapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmsapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -v
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -v && /bin/bash $deploy_script -v
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　vcmsapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmsapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　vcmsapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmsapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 
 ########################################################################
 # onekey deploy vcmsadmin
 vcmsadmin(){
   echo "*** Begin onekey deploy vcms api service! ***"
-  /bin/bash $mvn_script -V && /bin/bash $deploy_script -V
-  echo ""
+  /bin/bash $mvn_script -V
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　vcmsadmin onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmsadmin succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　vcmsadmin onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmsadmin failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -V
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -V && /bin/bash $deploy_script -V
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　vcmsadmin onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmsadmin succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　vcmsadmin onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmsadmin failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ########################################################################
 # onekey deploy vcmssynch
 vcmssynch(){
   echo "*** Begin onekey deploy vcms admin service! ***"
-  /bin/bash $mvn_script -Y && /bin/bash $deploy_script -Y
-  echo ""
+  /bin/bash $mvn_script -Y
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　vcmssynch onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmssynch succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　vcmssynch onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmssynch failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -Y
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -Y && /bin/bash $deploy_script -Y
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　vcmssynch onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmssynch succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　vcmssynch onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmssynch failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 # onekey deploy vcmsapi
 vcmsapi(){
   echo "*** Begin onekey deploy vcms synch service! ***"
-  /bin/bash $mvn_script -G && /bin/bash $deploy_script -G
-  echo ""
+  /bin/bash $mvn_script -G
   if [ $? -eq 0 ];then
-      echo "*************************************************"
-      echo "***　　　vcmsapi onekey deploy succeed!       ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmsapi succeed!  ***" >> $onekey_deploy_log
-  else
-      echo "*************************************************"
-      echo "***　　　vcmsapi onekey deploy failed!        ***"
-      echo "*************************************************"
-      echo "***  $Date onekey deploy vcmsapi failed!   ***" >> $onekey_deploy_log
+    echo ""
+    echo " $Date Localhost Mvn deploy succeed!"
+    /bin/bash $deploy_script -G
+    echo " $Date Localhost Mvn deploy succeed!" >> $onekey_deploy_log
+    else 
+    echo ""
+    echo " $Date Localhost Mvn deploy failed! "
+    echo " $Date Localhost Mvn deploy failed! " >> $onekey_deploy_log
+    exit 0
   fi
+  # /bin/bash $mvn_script -G && /bin/bash $deploy_script -G
+  # echo ""
+  # if [ $? -eq 0 ];then
+  #     echo "*************************************************"
+  #     echo "***　　　vcmsapi onekey deploy succeed!       ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmsapi succeed!  ***" >> $onekey_deploy_log
+  # else
+  #     echo "*************************************************"
+  #     echo "***　　　vcmsapi onekey deploy failed!        ***"
+  #     echo "*************************************************"
+  #     echo "***  $Date onekey deploy vcmsapi failed!   ***" >> $onekey_deploy_log
+  # fi
 }
 ################################################################################################
 # Script common functions && Scripts Usage
