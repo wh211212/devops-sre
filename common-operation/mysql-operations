@@ -1,0 +1,173 @@
+#mysql command
+
+update mysql.user set password=password('0gOpwsRbqM3BPXzL9dnj') where user='Changhong';
+
+flush privileges; 
+
+SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
+
+GRANT ALL PRIVILEGES ON crm.* TO 'songchanghong'@'192.168.103.%' IDENTIFIED BY '0gOpwsRbqM3BPXzL9dnj';
+
+GRANT ALL PRIVILEGES ON algo_quote.* TO 'algo_quote'@'192.168.103.%' IDENTIFIED BY 'R8neS90XVuuPQGdI6Rep';
+
+GRANT ALL PRIVILEGES ON nkb.* TO 'nkb'@'%' IDENTIFIED BY '211212';
+
+#导出
+
+
+crshen / eoswkdtlstjddlf
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY '123456';
+
+175.102.133.%
+
+ WITH GRANT OPTION 
+
+revoke all privileges ON *.* from 'zhoucong'@'175.102.133.%';
+
+
+delete from mysql.user where user="zhoucong" and host="1175.102.133.%";
+
+flush privileges;
+
+
+#导出txt文件
+select * from table_name into outfile 'table_name.txt';
+
+DROP TEMPORARY TABLE IF EXISTS tmp_ts 
+
+
+
+
+
+bin/elasticsearch -Des.insecure.allow.root=true
+
+
+192.168.10.101 changhong changhong123. 22
+
+sudo mysql -uChanghong -h172.16.1.4 -pChanghong123.
+
+
+
+#saltstack usage
+
+rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch.rpm
+
+rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch.rpm
+
+yum -y install salt-minion
+
+sed -i 's/\#master: salt/master: 192.168.0.72/' /etc/salt/minion
+
+sed -i 's/\#id:/id: redis-api/' /etc/salt/minion
+
+/etc/init.d/salt-minion restart
+
+#nginx command
+
+HTTP 协议状态码定义可以参阅：Hypertext Transfer Protocol -- HTTP/1.1
+
+# 访问网站的浏览器类型排序
+
+awk -F\" '{print $6}' aniu.tv.access.log | sort | uniq -c | sort -nr | head -10
+
+# 统计服务器返回的状态码
+
+awk '{print $9}' aniu.tv.access.log | sort | uniq -c | sort -nr
+
+# 查找并显示所有状态码为 404 的请求
+
+awk '($9 ~ /404/)' aniu.tv.access.log | less
+
+# 统计所有状态码为 404 的请求
+
+awk '($9 ~ /404/)' aniu.tv.access.log | awk '{print $9,$7}' | sort | uniq -c | sort -nr | less
+
+# 某个请求 ( 例如 : URI: /path/to/notfound ) 产生了大量的 404 错误，我们可以通过下面的命令找到这个请求是来自于哪一个引用页，和来自于什么浏览器。
+
+awk -F\" '($2 ~ "^GET /Public/Common/images/login_sj.png "){print $4,$6}' aniu.tv.access.log | less
+
+# 追查谁在盗链网站图片
+awk -F\" '($2 ~ /\.(jpg|gif|png)/ && $4 !~ /^http:\/\/www\.aniu\.tv/) {print $4}' aniu.tv.access.log | sort | uniq -c | sort | less
+
+# 与访问 IP 地址相关的命令
+
+统计共有多少个不同的 IP 访问：
+
+awk '{print $1}' aniu.tv.access.log | sort | uniq -c | sort -nr | head -10
+
+统计每一个 IP 访问了多少个页面：
+
+awk '{++S[$1]} END {for (a in S) print a,S[a]}' log_file
+
+将每个 IP 访问的页面数进行从小到大排序：
+
+awk '{++S[$1]} END {for (a in S) print S[a],a}' aniu.tv.access.log | sort -nr | less
+
+查看某一个 IP（例如 223.99.242.151 ）访问了哪些页面：
+
+egrep ^223.99.242.151 aniu.tv.access.log | awk '{print $1,$7}' | less
+
+
+
+
+统计 2016 年9 月 1日 11 时内有多少 IP 访问 :
+
+awk '{print $4,$1}' aniu.tv.access.log | grep 6/Sep/2016:11 | awk '{print $2}'| sort | uniq | wc -l
+
+统计访问最多的前十个 IP 地址
+
+awk '{print $1}' aniu.tv.access.log | sort | uniq -c | sort -nr | head -10
+
+#与响应页面大小的命令
+
+列出传输大小最大的几个文件
+
+cat aniu.tv.access.log | awk '{print $10 " " $1 " " $4 " " $7}' | sort -nr | head -10
+
+列出输出大于 204800 byte ( 20kb) 的页面以及对应页面发生次数
+
+cat aniu.tv.access.log | awk '($10 > 20000){print $7}'| sort -n | uniq -c | sort -nr | head -10
+
+
+#与页面响应时间相关的命令
+
+如果日志最后一列记录的是页面文件传输时间 (%T)，例如我们可以自定义日志格式为：
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %T" combined
+
+可以使用下面的命令统计出所有响应时间超过 3 秒的日志记录。
+awk '($NF > 3){print $0}' access.log
+
+注意：NF 是当前记录中域的个数。$NF 即最后一个域。
+列出相应时间超过 5 秒的请求
+awk '($NF > 5){print $0}' access.log | awk -F\" '{print $2}' |sort -n| uniq -c|sort -nr|head -20
+
+
+#svn
+
+cd /etc/subversion/
+htpasswd -m /etc/subversion/passwd wanfei
+
+
+# shell
+
+echo -e "\033[40;33m hello world \033[0m"
+
+
+#python 
+
+wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+
+# ssh
+
+sed -i 's/#Port 22/Port 54077/' /etc/ssh/sshd_config && /etc/init.d/sshd restart
+
+
+# add user
+
+useradd shenjia && echo shenjia123. | passwd --stdin shenjia
+
+echo "shenjia ALL=(ALL) ALL" >> /etc/sudoers
+
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAk3D2rM47e38tOqCuUFPkDqozB4RH8dg9Ou4bjozyiXLmpjyy2m0l8G5EW4f/GBu2qf1Gizue0lsY8BALUjOSV0togiWrz1c9EGJK64ZPLCik/Bcshz/yexUbVvOIth1QVtN6EV63Xn+N+UPDDGeM6AEuWQpLofV2usoUnlJYW7dMRlkaRtVXpy3RLVM65HatoecgZkRNxbHq8aBQAsFMbcoIioRPcQ2ggMXESAQ6aaNQZVmIvdY15VMVPkCQM2uAcYTMz2iduaMbGeLfeqjSYpdufSf5TzrLJ6yIXozyMfF+Xvx7BN51uadVEfTnQY8yTmFliZZ/ABmVr0it+nT2tQ== root@localhost.localdomain" >> authorized_keys

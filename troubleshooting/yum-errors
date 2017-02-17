@@ -1,0 +1,12 @@
+yum-errors
+
+1、 
+
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+ Eg. Invalid release/
+removing mirrorlist with no valid mirrors: /var/cache/yum/x86_64/$releasever/base/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: base
+
+# rm -rf /var/cache/yum/x86_64/$releasever/base/mirrorlist.txt
+
+2、
