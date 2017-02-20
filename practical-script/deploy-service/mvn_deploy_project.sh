@@ -14,6 +14,7 @@
 #    2016-12-14      wanghui     First version release for testing
 #    2016-12-30      wanghui     add remote exceute script
 #    2017-02-14      wanghui     gather all project in one script
+#    2017-02-20      wanghui     fix bug, then failed, function exit o change to exit 1
 ##################################################################################################
 
 version_num=2016-12-12
@@ -58,19 +59,19 @@ jar() {
             echo "###################################################"
             echo "#-- Dependency tysx-mms-service deploy failed! --#"
             echo "###################################################"
-            exit 0
+            exit 1
         fi
         else
         echo "##############################################"
         echo "#-- Dependency tysx-mms-db deploy failed! --#"
         echo "##############################################"
-        exit 0
+        exit 1
       fi
     else
     echo "################################################"
     echo "#-- Dependency tysx-mms-base deploy failed! --#"
     echo "################################################"
-    exit 0
+    exit 1
   fi
 }
 
@@ -90,12 +91,12 @@ api() {
       else
       echo "###################################"
       echo "### --  Api deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##################################################"
   echo "### Can't use jar,beause deploy jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 #############################################################################################
@@ -113,12 +114,12 @@ admin() {
       else
       echo "#####################################"
       echo "### --  Admin deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##################################################"
    echo "### Can't use jar,beause deploy jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -153,19 +154,19 @@ kernel() {
             echo "###################################################"
             echo "#--         aniu-core deploy failed!            --#"
             echo "###################################################"
-            exit 0
+            exit 1
         fi
         else
         echo "##############################################"
         echo "#--         aniu-module deploy failed!     --#"
         echo "##############################################"
-        exit 0
+        exit 1
       fi
     else
     echo "################################################"
     echo "#--       aniu-dependency deploy failed!     --#"
     echo "################################################"
-    exit 0
+    exit 1
   fi
 }
 
@@ -200,19 +201,19 @@ nkmcore() {
             echo "###################################################"
             echo "#--         aniu-nkm-redis deploy failed!            --#"
             echo "###################################################"
-            exit 0
+            exit 1
         fi
         else
         echo "##############################################"
         echo "#--         aniu-nkm-core deploy failed!     --#"
         echo "##############################################"
-        exit 0
+        exit 1
       fi
     else
     echo "################################################"
     echo "#--       aniu-nkm-module deploy failed!     --#"
     echo "################################################"
-    exit 0
+    exit 1
   fi
 }
 
@@ -234,12 +235,12 @@ niukeme() {
       else
       echo "#####################################################"
       echo "### --  aniu-api-product_nkm deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -259,12 +260,12 @@ niukeme_task() {
       else
       echo "#####################################################"
       echo "### --  aniu-api-product_nkm_task deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -279,7 +280,7 @@ crmcore(){
       echo "###  aniu-crm-dependency deploy succeed! ###"
     else 
       echo "###  aniu-crm-dependency deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $Crm_Project/aniu-crm-module && svn up && mvn clean deploy -Ponline -q
@@ -287,7 +288,7 @@ crmcore(){
       echo "###  aniu-crm-dependency deploy succeed! ###"
     else 
       echo "###  aniu-crm-dependency deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $Crm_Project/aniu-crm-dao && svn up && mvn clean deploy -Ponline -q
@@ -295,7 +296,7 @@ crmcore(){
       echo "###  aniu-crm-dependency deploy succeed! ###"
     else 
       echo "###  aniu-crm-dependency deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $Crm_Project/aniu-crm-service && svn up && mvn clean deploy -Ponline -q
@@ -303,7 +304,7 @@ crmcore(){
       echo "###  aniu-crm-dependency deploy succeed! ###"
     else 
       echo "###  aniu-crm-dependency deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $Crm_Project/aniu-crm-core && svn up && mvn clean deploy -Ponline -q 
@@ -311,7 +312,7 @@ crmcore(){
       echo "###  aniu-crm-dependency deploy succeed! ###"
     else 
       echo "###  aniu-crm-dependency deploy failed! ###"
-      exit 0
+      exit 1
   fi
 }
 
@@ -330,12 +331,12 @@ crm_admin() {
       else
       echo "#####################################################"
       echo "### --  aniu-crm-admin deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##############################################################"
    echo "### Can't use crm dependency,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -356,12 +357,12 @@ crm_api() {
       else
       echo "#####################################################"
       echo "### --  aniu-crm-api deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##############################################################"
    echo "### Can't use crm dependency,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -380,12 +381,12 @@ message() {
       else
       echo "#####################################################"
       echo "### --  aniu-message-channel deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -405,12 +406,12 @@ stock() {
       else
       echo "#####################################################"
       echo "### --  aniu-api-stock deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -429,12 +430,12 @@ vcms() {
       else
       echo "#####################################################"
       echo "### --  aniu-vcms-api deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -453,12 +454,12 @@ vcms_synch() {
       else
       echo "#####################################################"
       echo "### --  aniu-vcms-synch deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -473,7 +474,7 @@ product(){
       echo "###  aniu-dependency deploy succeed! ###"
     else 
       echo "###  aniu-dependency deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $New_Project/aniu-module && svn up && mvn clean deploy -Ponline -q
@@ -481,7 +482,7 @@ product(){
       echo "###  aniu-module deploy succeed! ###"
     else 
       echo "###  aniu-module deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $New_Project/aniu-product-dao && svn up && mvn clean deploy -Ponline -q
@@ -489,7 +490,7 @@ product(){
       echo "###  aniu-product-dao deploy succeed! ###"
     else 
       echo "###  aniu-product-dao deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $New_Project/aniu-product-service && svn up && mvn clean deploy -Ponline -q
@@ -497,7 +498,7 @@ product(){
       echo "###  aniu-product-service deploy succeed! ###"
     else 
       echo "###  aniu-product-service deploy failed! ###"
-      exit 0
+      exit 1
   fi
 #
   cd $New_Project/aniu-product-core && svn up && mvn clean deploy -Ponline -q 
@@ -505,7 +506,7 @@ product(){
       echo "###  aniu-product-core deploy succeed! ###"
     else 
       echo "###  aniu-product-core deploy failed! ###"
-      exit 0
+      exit 1
   fi
 }
 
@@ -524,12 +525,12 @@ vcms-admin() {
       else
       echo "#####################################################"
       echo "### --  aniu-vcms-admin deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -549,12 +550,12 @@ product_api() {
       else
       echo "#####################################################"
       echo "### --  aniu-api-product deploy failed!  -- #########"
-      exit 0
+      exit 1
     fi
   else
    echo "#########################################################################"
    echo "### Can't use kernel jar,beause deploy product dependency was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -574,12 +575,12 @@ product_service() {
       else
       echo "#####################################################"
       echo "### --  aniu-service-product deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##########################################################"
    echo "### Can't use kernel jar,beause kernel jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -598,12 +599,12 @@ mmadmin() {
       else
       echo "#############################################"
       echo "### --  aniu-mmsadmin deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##################################################"
    echo "### Can't use jar,beause deploy jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -622,12 +623,12 @@ admin_icntv() {
       else
       echo "#############################################"
       echo "### --  aniu-admin-icntv deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
   else
    echo "##################################################"
    echo "### Can't use jar,beause deploy jar was failed! ###"
-  exit 0
+  exit 1
 fi
 }
 
@@ -644,7 +645,7 @@ aniu_pay() {
       else
       echo "#############################################"
       echo "### --  aniu-pay deploy failed!  -- ###"
-      exit 0
+      exit 1
     fi
 }
 
@@ -662,7 +663,7 @@ nkm_admin() {
     echo "mvn deploy nkm-admin sueeccd!"
   else
     echo "mvn deploy nkm-admin failed!"
-    exit 0
+    exit 1
   fi
 }
 

@@ -1,0 +1,21 @@
+#JStorm分布式实时计算引擎
+
+## JStorm 简介
+
+- 官网：http://120.25.204.125/index.html
+- Github：https://github.com/alibaba/jstorm
+
+## JStorm 安装环境
+
+> OS: CentOS 6.8
+> host.ip: aniutv-1(10.1.1.78) aniutv-2(10.1.1.80) aniutv-5(10.1.1.97)
+> 
+
+## JStorm 安装步骤
+
+> 1. 下载稳定版的release包（https://github.com/alibaba/jstorm/wiki/Downloads）
+> 2. 
+
+
+
+ 

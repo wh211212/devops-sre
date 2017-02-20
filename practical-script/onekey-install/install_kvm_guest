@@ -2,3 +2,28 @@
 
 ## 创建虚拟机并安装系统，已安装CentOS 6 为例
 
+1. 通过http方式安装
+
+## 创建一个存储池
+
+ mkdir -p /var/kvm/images 
+
+ #
+virt-install -d -n aniu-jenkins -r 4096 --vcpus=1 --prompt --disk /dev/vg_aniutv6/aniu-kvm-1 --nographics -p -l http://mirrors.aliyun.com/centos/6.8/os/x86_64/ --extra-args="text console=com1 utf8 console=hvc0"
+
+
+
+# 注：name 规则--上海-阿牛-测试-number，简称
+
+ virt-install -d \
+--name SH-AN-T-1 \
+--ram 2048 \
+--disk path=/var/kvm/images/sh-an-t-1,size=30 \
+--vcpus 2 \
+--os-type linux \
+--os-variant rhel6 \
+--network bridge=br0 \
+--graphics none \
+--console pty,target_type=serial \
+--location 'http://mirrors.aliyun.com/centos/6.8/os/x86_64/' \
+--extra-args 'console=ttyS0,115200n8 serial'
