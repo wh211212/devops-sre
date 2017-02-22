@@ -81,7 +81,7 @@ DEVICE=p4p1
 TYPE=Ethernet
 ONBOOT=yes
 BRIDGE=br0
-' | sudo tee vi /etc/sysconfig/network-scripts/ifcfg-p4p1
+' | sudo tee /etc/sysconfig/network-scripts/ifcfg-p4p1
 
 
 # restart network
