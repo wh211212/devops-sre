@@ -9,6 +9,8 @@
  mkdir -p /var/kvm/images 
 
  #
+
+
 virt-install -d -n aniu-jenkins -r 4096 --vcpus=1 --prompt --disk /dev/vg_aniutv6/aniu-kvm-1 --nographics -p -l http://mirrors.aliyun.com/centos/6.8/os/x86_64/ --extra-args="text console=com1 utf8 console=hvc0"
 
 
@@ -27,3 +29,52 @@ virt-install -d -n aniu-jenkins -r 4096 --vcpus=1 --prompt --disk /dev/vg_aniutv
 --console pty,target_type=serial \
 --location 'http://mirrors.aliyun.com/centos/6.8/os/x86_64/' \
 --extra-args 'console=ttyS0,115200n8 serial'
+
+#
+
+
+ virt-install -d \
+--name mongodb-2 \
+--ram 4096 \
+--disk /dev/vg_aniutv6/mongodb \
+--vcpus 2 \
+--os-type linux \
+--os-variant rhel6 \
+--network bridge=br0 \
+--graphics none \
+--console pty,target_type=serial \
+--location 'http://mirrors.aliyun.com/centos/6.8/os/x86_64/' \
+--extra-args 'console=ttyS0,115200n8 serial'
+
+# 参数含义
+--name
+specify the name of Virtual Machine
+--ram
+specify the amount of memories of Virtual Machine
+--disk path=xxx ,size=xxx
+'path=' ⇒ specify the location of disks of Virtual Machine
+'size=' ⇒ specify the amount of disks of Virtual Machine
+--vcpus
+specify the virtual CPUs
+--os-type
+specify the type of GuestOS
+--os-variant
+specify the kind of GuestOS
+--network
+specify network types of Virtual Machine
+--graphics
+specify the kind of graphics. if set 'none', it means nographics.
+--console
+specify the console type
+--location
+specify the location of installation where from
+--extra-args
+specify parameters that is set in kernel
+
+# 虚拟机安装完成之后重启登录到Guest
+
+按 Ctrl + ] 退出GuestOS
+
+virsh console mongodb  # 从GuestOS连接到Guest
+
+

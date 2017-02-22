@@ -75,7 +75,7 @@ selinux()
 }
 
 #xen_hwcap_setting()
-#{
+# {
 #    if [ -s /etc/ld.so.conf.d/libc6-xen.conf ]; then
 #        sed -i 's/hwcap 1 nosegneg/hwcap 0 nosegneg/g' /etc/ld.so.conf.d/libc6-xen.conf
 #    fi

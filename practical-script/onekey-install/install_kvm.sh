@@ -66,22 +66,22 @@ echo '# change
     ONBOOT=yes
     NM_CONTROLLED=yes
     BOOTPROTO=none
-    IPADDR=192.168.1.159                                       # server current ip
+    IPADDR=10.1.1.59                                       # server current ip
     NETMASK=255.255.255.0
-    GATEWAY=192.168.1.1                                      # gateway
+    GATEWAY=10.1.1.1                                      # gateway
     DNS2=114.114.114.114
-    DNS1=202.96.209.133
+    DNS1=10.1.1.1
 	IPV6INIT=no
 	USERCTL=no
 ' | sudo tee /etc/sysconfig/network-scripts/ifcfg-br0	
 #
 echo '
 # create new
-DEVICE=eth0
+DEVICE=p4p1
 TYPE=Ethernet
 ONBOOT=yes
 BRIDGE=br0
-' | sudo tee vi /etc/sysconfig/network-scripts/ifcfg-eth0
+' | sudo tee vi /etc/sysconfig/network-scripts/ifcfg-p4p1
 
 
 # restart network
