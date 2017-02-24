@@ -170,4 +170,5 @@ useradd shenjia && echo shenjia123. | passwd --stdin shenjia
 echo "shenjia ALL=(ALL) ALL" >> /etc/sudoers
 
 
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAk3D2rM47e38tOqCuUFPkDqozB4RH8dg9Ou4bjozyiXLmpjyy2m0l8G5EW4f/GBu2qf1Gizue0lsY8BALUjOSV0togiWrz1c9EGJK64ZPLCik/Bcshz/yexUbVvOIth1QVtN6EV63Xn+N+UPDDGeM6AEuWQpLofV2usoUnlJYW7dMRlkaRtVXpy3RLVM65HatoecgZkRNxbHq8aBQAsFMbcoIioRPcQ2ggMXESAQ6aaNQZVmIvdY15VMVPkCQM2uAcYTMz2iduaMbGeLfeqjSYpdufSf5TzrLJ6yIXozyMfF+Xvx7BN51uadVEfTnQY8yTmFliZZ/ABmVr0it+nT2tQ== root@localhost.localdomain" >> authorized_keys
+
+
