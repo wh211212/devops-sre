@@ -1,0 +1,16 @@
+# CentOS 镜像源
+
+https://www.centos.org/download/mirrors/
+
+Asia	China	Zhejiang University                	          http://mirrors.zju.edu.cn/centos/		
+Asia	China	Alibaba Cloud Computing	                      http://mirrors.aliyun.com/centos/		
+Asia	China	Beijing Teletron Telecom Engineering	      http://mirrors.btte.net/centos/		
+Asia	China	China University of Geosciences	http://mirrors.cug.edu.cn/centos/		
+Asia	China	CN99 Corp.	http://mirrors.cn99.com/centos/		
+Asia	China	Dalian Neusoft University of Information	http://mirrors.neusoft.edu.cn/centos/		
+Asia	China	Lanzhou University Open Source Society	http://mirror.lzu.edu.cn/centos/		
+Asia	China	NetEase	http://mirrors.163.com/centos/		
+Asia	China	Shanghai Jiao Tong University	http://ftp.sjtu.edu.cn/centos/	ftp://ftp.sjtu.edu.cn/centos/	
+Asia	China	Sohu Inc, Beijing P.R. China	http://mirrors.sohu.com/centos/		
+Asia	China	Tsinghua University	http://mirrors.tuna.tsinghua.edu.cn/centos/		rsync://mirrors.tuna.tsinghua.edu.cn/centos/
+Asia	China	University of Science and Tech of China	http://centos.ustc.edu.cn/centos/

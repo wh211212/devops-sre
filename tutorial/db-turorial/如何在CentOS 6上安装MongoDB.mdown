@@ -1,0 +1,30 @@
+# 如何在CentOS 6上安装MongoDB
+
+- 1. MongoDB介绍
+
+> MongoDB是一个面向文档的数据库，是免费和开源的。它被归类为NoSQL数据库，因为它不依赖于传统的基于表的关系数据库结构。相反，它使用类似JSON的文档和动态模式。与关系数据库不同，MongoDB在将数据添加到数据库之前不需要预定义模式。您可以随时根据需要更改模式，而无需使用更新的模式设置新的数据库。
+
+- 2. 安装环境
+
+> https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
+
+#
+
+echo '
+[mongodb-org-3.4]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
+' | sudo tee /etc/yum.repos.d/mongodb-org-3.4.repo
+
+# 
+sudo yum install -y mongodb-org
+
+#
+sudo service mongod start && sudo chkconfig mongod on
+
+tailf /var/log/mongodb/mongod.log  # 查看启动日志
+
+

@@ -1,0 +1,216 @@
+由于公司的IOS离职，侥幸获得其Mac Pro的使用权，因此特地总结了下小白使用Mac OS X的初始配置。
+
+<a href="http://www.linuxprobe.com/wp-content/uploads/2017/02/macOS.png"><img class="aligncenter size-full wp-image-51622" src="http://www.linuxprobe.com/wp-content/uploads/2017/02/macOS.png" alt="" width="310" height="163" /></a>
+
+1、系统首选项（system preeferences）
+
+我拿到电脑确认没问题之后，选择了重装Mac OS X，然后进行系统升级等操作，系统重装完成之后，自定义相关配置，修改账号密码，登录apple id等
+
+2、安装Xcode
+
+命令行执行下面命令直接安装Xcode
+<pre> xcode-select --install</pre>
+3、安装Homebrew
+
+Homebrew类似于CentOS系列的yum包管理的yum，使用brew通过命令的方式来进行Mac上面的服务的安装，更新和卸载。
+<pre>ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo 'export PATH="/usr/local/bin:$PATH"' &gt;&gt; ~/.bash_profile</pre>
+
+4、Homebrew使用Homebrew
+
+<pre># 安装package（服务）
+brew install package(service_name)
+brew upgrade (更新)
+brew --help 查看brew具体用法</pre>
+
+5、使用homebrew安装常用软件
+
+<pre>brew cask install google-chrome # 安装谷歌浏览器
+
+#一些插件，以允许不同的文件使用Mac Quicklook。包括语法高亮，markdown渲染，jsons预览，补丁文件，csv，zip文件等功能。
+$ brew cask install qlcolorcode
+$ brew cask install qlstephen
+$ brew cask install qlmarkdown
+$ brew cask install quicklook-json
+$ brew cask install qlprettypatch
+$ brew cask install quicklook-csv
+$ brew cask install betterzipql
+$ brew cask install webpquicklook
+$ brew cask install suspicious-package</pre>
+
+# 应用程序安装
+<pre>$ brew cask install airmail
+$ brew cask install alfred
+$ brew cask install android-file-transfer
+$ brew cask install asepsis
+$ brew cask install appcleaner
+$ brew cask install caffeine
+$ brew cask install cheatsheet
+$ brew cask install doubletwist
+$ brew cask install dropbox
+$ brew cask install google-chrome
+$ brew cask install google-drive
+$ brew cask install google-hangouts
+$ brew cask install flux
+$ brew cask install latexian
+$ brew cask install 1password
+$ brew cask install pdftk
+$ brew cask install spectacle
+$ brew cask install sublime-text
+$ brew cask install superduper
+$ brew cask install totalfinder
+$ brew cask install transmission
+$ brew cask install valentina-studio
+$ brew cask install vlc
+</pre>
+6、iTterm2 设置
+
+iterm官网：http://www.iterm2.com/
+使用brew安装iterm
+
+# 颜色和字体设置
+
+设置打开和关闭终端的快捷键位：command + option + i
+下载iTerm主题（https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/schemes）
+如果你使用BASH而不是ZSH，你可以添加导出CLICOLOR = 1行到你的〜/ .bash_profile文件，以列出好的着色。
+
+7、Zsh的安装使用
+
+<pre>  brew install zsh zsh-completions
+# 在zsh的顶部安装prezto以获得更多功能
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"</pre>
+# 创建.zshrc
+
+<pre>    setopt EXTENDED_GLOB
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    done </pre>
+
+#编辑〜/ .zpreztorc和添加文件
+<pre> zstyle ':prezto:load' pmodule \
+      'environment' \
+      'terminal' \
+      'editor' \
+      'history' \
+      'directory' \
+      'spectrum' \
+      'utility' \
+      'completion' \
+      'git' \
+      'syntax-highlighting' \
+      'history-substring-search' \
+      'prompt'
+
+    zstyle ':prezto:module:prompt' theme 'paradox' </pre>
+
+# 通过在文本编辑器中打开文件并添加以下内容来编辑.zshrc
+<pre>    # Add env.sh
+    source ~/Projects/config/env.sh</pre>
+
+# Oh My Zsh
+
+<pre>curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
+chsh -s /usr/local/bin/zsh # 切换到zsh </pre>
+
+#通过在文本编辑器中打开文件来编辑.zshrc
+</pre>
+   ZSH_THEME=pygmalion
+    plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting)
+    # Add env.sh
+    source ~/Projects/config/env.sh </pre>
+
+# env.sh
+<pre>   #!/bin/zsh
+
+    # PATH
+    export PATH="/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    export EDITOR='subl -w'
+    # export PYTHONPATH=$PYTHONPATH
+    # export MANPATH="/usr/local/man:$MANPATH"
+
+    # Virtual Environment
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Projects
+    source /usr/local/bin/virtualenvwrapper.sh
+
+    # Owner
+    export USER_NAME="YOUR NAME"
+    eval "$(rbenv init -)"
+
+    # FileSearch
+    function f() { find . -iname "*$1*" ${@:2} }
+    function r() { grep "$1" ${@:2} -R . }
+
+    #mkdir and cd
+    function mkcd() { mkdir -p "$@" &amp;&amp; cd "$_"; }
+
+    # Aliases
+    alias cppcompile='c++ -std=c++11 -stdlib=libc++'
+
+    # Use sublimetext for editing config files
+    alias zshconfig="subl ~/.zshrc"
+    alias envconfig="subl ~/Projects/config/env.sh"</pre>
+
+8、Git和GitHub
+
+# Git安装≈
+<pre>brew install git</pre>
+
+# Git设置
+
+<pre>$ git config --global user.name "shaonbean"
+$ git config --global user.email "wh211212@qq.com"</pre>
+
+#要将代码推送到GitHub存储库，我们将使用推荐的HTTPS方法（与SSH）。因此，您不必每次都键入用户名和密码，让我们启用Git密码缓存，如下所示：
+
+<pre>git config --global credential.helper osxkeychain</pre>
+
+# 将Sublime Text设置为Git Mergetool
+<pre>$ git config --global mergetool.sublime.cmd "subl -w \$MERGED"
+$ git config --global mergetool.sublime.trustExitCode false
+$ git config --global merge.tool sublime
+$ git mergetool -y
+</pre>
+
+9、Git ignore
+
+<pre># Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Compiled Python files
+*.pyc
+
+# Compiled C++ files
+*.out
+
+# Application specific files
+venv
+node_modules
+.sass-cache</pre>
+
+10、安装vim
+Vim是一个高度可配置的文本编辑器，用于创建和更改任何类型的文本非常高效。它作为'vi'包含在大多数UNIX系统和Apple OS X中。</pre>
+<pre> brew install vim
+git clone https://github.com/amix/vimrc.git ~/.vim_runtime
+
+sh ~/.vim_runtime/install_awesome_vimrc.sh</pre>
+
+# 更新
+<pre> <span class="hljs-built_in">cd</span> ~/.vim_runtime &amp;&amp; git pull --rebase &amp;&amp; <span class="hljs-built_in">cd</span> -
+</pre>
+
+#Awesome它是vim配置和插件的集合，像vim环境的配置管理器。
+<pre> git clone https://github.com/square/maximum-awesome.git
+<span class="hljs-built_in">cd</span> maximum-awesome
+rake
+</pre>

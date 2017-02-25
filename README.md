@@ -29,6 +29,8 @@
 - www.vdevops.com
 - http://blog.csdn.net/wh211212
 - http://weibo.com/wh211212
+- https://wh211212.github.io/
+- https://twitter.com/Ivyivyli
 
 
 ## kobe words

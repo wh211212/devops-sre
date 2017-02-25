@@ -1,0 +1,12 @@
+tomcat-errors
+
+# 根据时间搜索catalina.out错误日志
+
+
+grep -C 20 ERROR catalina.out > /tmp/tmpfile
+start_time=“log里的开始时间”
+end_time=“log里结束时间”
+idx_1=`cat -n tmp | grep "${start_time}"|awk '{print $1}'`
+idx_2=`cat -n tmp | grep "${end_time}"|awk '{print $1}'`
+sed -n "${idx_1},${idx_2}p"  tmpfile > result
+more result

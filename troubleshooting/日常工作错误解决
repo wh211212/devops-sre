@@ -1,0 +1,49 @@
+日常工作错误解决
+
+1、lvm error
+
+# Error reading block 358645760 (Invalid argument).  Ignore error<y>?
+
+
+2、mysql error
+
+
+# 存储过程
+
+select `name` from MySQL.proc where db = 'your_db_name' and `type` = 'PROCEDURE'
+
+show procedure status;
+
+方法一：
+       select `name` from mysql.proc where db = 'your_db_name' and `type` = 'PROCEDURE'   //存储过程
+       select `name` from mysql.proc where db = 'your_db_name' and `type` = 'FUNCTION'   //函数
+
+方法二：
+
+  show procedure status; //存储过程
+
+ show function status;     //函数
+
+查看存储过程或函数的创建代码
+
+show create procedure proc_name;
+show create function func_name;
+
+查看视图
+
+SELECT * from information_schema.VIEWS   //视图
+
+SELECT * from information_schema.TABLES   //表
+
+查看触发器
+
+方法一：
+语法：SHOW TRIGGERS [FROM db_name] [LIKE expr]
+实例：SHOW TRIGGERS\G     //触发器
+
+
+grant all privileges on nkm.* to 'wanghui'@'192.168.103.%';
+
+方法二：
+对INFORMATION_SCHEMA数据库中的TRIGGERS表查询
+mysql>SELECT * FROM triggers T WHERE trigger_name=”mytrigger” \G
