@@ -1,0 +1,44 @@
+14章、使用virsh管理guest虚拟机
+
+# virsh help [command | group] help命令可以在有或没有选项的情况下使用。当不使用选项时，列出所有命令，每行一个。与选项一起使用时，会将其分组为类别，显示每个组的关键字。
+
+#要显示仅适用于特定选项的命令，您需要将该组的关键字作为选项。例如：
+virsh help pool
+ Storage Pool (help keyword 'pool'):
+    find-storage-pool-sources-as   find potential storage pool sources
+    find-storage-pool-sources      discover potential storage pool sources
+    pool-autostart                 autostart a pool
+    pool-build                     build a pool
+    pool-create-as                 create a pool from a set of args
+    pool-create                    create a pool from an XML file
+    pool-define-as                 define a pool from a set of args
+    pool-define                    define (but don't start) a pool from an XML file
+    pool-delete                    delete a pool
+    pool-destroy                   destroy (stop) a pool
+    pool-dumpxml                   pool information in XML
+    pool-edit                      edit XML configuration for a storage pool
+    pool-info                      storage pool information
+    pool-list                      list pools
+    pool-name                      convert a pool UUID to pool name
+    pool-refresh                   refresh a pool
+    pool-start                     start a (previously defined) inactive pool
+    pool-undefine                  undefine an inactive pool
+    pool-uuid                      convert a pool name to pool UUID
+
+# 使用具有命令选项的相同命令，可提供有关该特定命令的帮助信息。例如：
+virsh help vol-path
+  NAME
+    vol-path - returns the volume path for a given volume name or key
+
+  SYNOPSIS
+    vol-path <vol> [--pool <string>]
+
+  OPTIONS
+    [--vol] <string>  volume name or key
+    --pool <string>  pool name or uuid
+
+# quit命令和exit命令将关闭终端。例如：
+virsh exit
+virsh quit
+
+#

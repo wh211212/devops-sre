@@ -1,2 +1,29 @@
+<<<<<<< HEAD
 #
   
+=======
+# oofice website
+https://atom.io/packages
+
+# Trending
+
+first: install packages:
+
+linter
+
+file-icons
+
+atom-beautify
+
+minimap
+
+autocomplete-python
+
+git-plus
+
+language-babel
+
+platformio-ide-terminal
+
+autocomplete-python
+>>>>>>> bd3a9549bafadf7ccb2248a9f87ba9f92286a5d8

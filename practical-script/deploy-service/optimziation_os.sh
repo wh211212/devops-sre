@@ -7,8 +7,11 @@
 #   20160601       shaonbean           initial creation
 #################################################
 #   Auther: hwang@aniu.tv
+#   Changelog:
+#   20170222   shaom   upgrade script
 ################################################# 
 # Check if user is root
+# 
 if [ $(id -u) != "0" ]; then
     echo "Error: You must be root to run this script, please use root to initialization OS"
     exit 1
@@ -30,7 +33,7 @@ check_hosts()
     ping -c1 www.baidu.com
     if [ $? -eq 0 ] ; then
         echo "DNS...ok"
-        echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+        echo "nameserver 114.114.114.114" >> /etc/resolv.conf
     else
         echo "DNS...fail"
         echo -e "nameserver 8.8.8.8\nameserver 114.114.114.114" > /etc/resolv.conf
