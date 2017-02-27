@@ -214,3 +214,5 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh</pre>
 <span class="hljs-built_in">cd</span> maximum-awesome
 rake
 </pre>
+
+11. 
