@@ -119,7 +119,7 @@ stop_server()
 sshd_config(){
     #sed -i '/^#Port/s/#Port 22/Port 54077/g' /etc/ssh/sshd_config
     sed -i '/^#UseDNS/s/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
-    #sed -i 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+    sed -i 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/g' /etc/ssh/sshd_config
     /etc/init.d/sshd restart
     echo "set sshd && restat sshd succedd!"
@@ -151,7 +151,12 @@ sed -i 's/^HISTSIZE=.*$/HISTSIZE=1000/' /etc/profile
 #echo "export PROMPT_COMMAND='{ msg=\$(history 1 | { read x y; echo \$y; });user=\$(whoami); echo \$(date \"+%Y-%m-%d %H:%M:%S\"):\$user:\`pwd\`/:\$msg ---- \$(who am i); } >> /tmp/\`hostname\`.\`whoami\`.history-timestamp'" >> /root/.bash_profile
  
 # wrong password five times locked 180s
-sed -i '4a auth        required      pam_tally2.so deny=5 unlock_time=180' /etc/pam.d/system-auth
+
+sed -i '4a auth        required      pam_tally2.so deny=5 unlock_time=180' >> /etc/pam.d/system-auth
+
+
+sed-i's#99999#180#'/etc/login.defs
+
 
 # forbiden ctl-alt-delete
 sed -i 's/exec \/sbin\/shutdown -r now \"Control-Alt-Delete pressed"/\#exec \/sbin\/shutdown -r now \"Control-Alt-Delete pressed"/g' /etc/init/control-alt-delete.conf

@@ -1,12 +1,8 @@
 tomcat-errors
 
-# 根据时间搜索catalina.out错误日志
 
+#
+JAVA_OPTS="-server -Xms1G -Xmx2G -Xss1024K -XX:PermSize=128M -XX:MaxPermSize=512M -Djava.awt.headless=true"
 
-grep -C 20 ERROR catalina.out > /tmp/tmpfile
-start_time=“log里的开始时间”
-end_time=“log里结束时间”
-idx_1=`cat -n tmp | grep "${start_time}"|awk '{print $1}'`
-idx_2=`cat -n tmp | grep "${end_time}"|awk '{print $1}'`
-sed -n "${idx_1},${idx_2}p"  tmpfile > result
-more result
+JVM参数含义：
+
