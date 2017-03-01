@@ -40,6 +40,12 @@ check_hosts()
     fi
 }
 
+repo_config()
+{
+  # add repo && set yum cache
+  rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch
+  sed -i "s/keepcache=0/keepcache=1/g" /etc/yum.conf
+}
 #Set time zone synchronization
 
 set_timezone()
@@ -170,7 +176,8 @@ delete_user()
 # delete no use user 
 echo "delete not use user"
 echo ""
-for user in adm lp sync shutdown halt uucp operator gopher news  
+#for user in adm lp sync shutdown halt uucp operator gopher ;do userdel $user ; done
+for user in adm lp sync shutdown halt uucp operator gopher
 do userdel $user ; done
 }
 
