@@ -21,6 +21,16 @@ echo "+------------------------------------------------------------------------+
 echo "|       To initialization the system for security and performance        |"
 echo "+------------------------------------------------------------------------+"
 
+# add user
+add_user()
+{
+  # add wh && set sudo
+  useradd wh
+  echo wh211212 | passwd --stdin wh
+  mkdir -p /home/wh/script
+  echo "wh  ALL=(ALL)      NOPASSWD: ALL" >> /etc/sudoers
+}
+
 #check host && network
 check_hosts()
 {   
@@ -40,10 +50,13 @@ check_hosts()
     fi
 }
 
-repo_config()
+repo_setup()
 {
   # add repo && set yum cache
-  rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch
+  # rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch
+  rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+  yum -y install centos-release-scl-rh centos-release-scl
+  yum -y install yum-plugin-priorities
   sed -i "s/keepcache=0/keepcache=1/g" /etc/yum.conf
 }
 #Set time zone synchronization
@@ -101,7 +114,7 @@ cat >> /etc/security/limits.conf <<EOF
 * hard nofile 8192
 EOF
 #ulimit -n 8192
-echo "ulimit -SHn 65535" >> /etc/rc.local
+#echo "ulimit -SHn 65535" >> /etc/rc.local
 }
 
 # ulimit -n 8192
@@ -110,7 +123,7 @@ echo "ulimit -SHn 65535" >> /etc/rc.local
 stop_server()
 { 
      echo "stop not nessccery services!"
-     for server in `chkconfig --list |grep 3:on|awk '{ print $1}'`
+     for server in `chkconfig --list | grep 3:on | awk '{ print $1}'`
          do
            chkconfig --level 3 $server off
          done
@@ -125,7 +138,7 @@ stop_server()
 sshd_config(){
     #sed -i '/^#Port/s/#Port 22/Port 54077/g' /etc/ssh/sshd_config
     sed -i '/^#UseDNS/s/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
-    sed -i 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+    #sed -i 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/g' /etc/ssh/sshd_config
     /etc/init.d/sshd restart
     echo "set sshd && restat sshd succedd!"
@@ -138,8 +151,8 @@ iptables(){
    chkconfig --level 3 iptables off
    #disable ipv6
    echo "alias net-pf-10 off" >> /etc/modprobe.d/modprobe.conf
-   echo "alias ipv6 off" >> /etc/modprobe.d/modprobe.conf
-   echo "NETWORKING_IPV6=no" >> /etc/sysconfig/network
+   echo "options ipv6 disable=1" >> /etc/modprobe.d/modprobe.conf
+   echo "NETWORKING_IPV6=off" >> /etc/sysconfig/network
    chkconfig --level 3 ip6tables off
    /etc/init.d/ip6tables stop
    echo "iptables is stop && ipv6 is disabled!"
@@ -159,10 +172,7 @@ sed -i 's/^HISTSIZE=.*$/HISTSIZE=1000/' /etc/profile
 # wrong password five times locked 180s
 
 sed -i '4a auth        required      pam_tally2.so deny=5 unlock_time=180' >> /etc/pam.d/system-auth
-
-
-sed-i's#99999#180#'/etc/login.defs
-
+sed -i 's#99999#180#' /etc/login.defs
 
 # forbiden ctl-alt-delete
 sed -i 's/exec \/sbin\/shutdown -r now \"Control-Alt-Delete pressed"/\#exec \/sbin\/shutdown -r now \"Control-Alt-Delete pressed"/g' /etc/init/control-alt-delete.conf
@@ -179,6 +189,53 @@ echo ""
 #for user in adm lp sync shutdown halt uucp operator gopher ;do userdel $user ; done
 for user in adm lp sync shutdown halt uucp operator gopher
 do userdel $user ; done
+}
+
+vim_setup()
+{
+cat > ~/.vimrc << EOF
+" use extended function of vim (no compatible with vi)
+set nocompatible
+" specify encoding
+set encoding=utf-8
+" specify file encoding
+set fileencodings=iso-2022-jp,sjis
+" specify file formats
+set fileformats=unix,dos
+" take backup
+" if not, specify [ set nobackup ]
+" set backup
+" specify backup directory
+" set backupdir=~/backup
+" take 50 search histories
+set history=50
+" ignore Case
+set ignorecase
+" distinct Capital if you mix it in search words
+set smartcase
+" highlights matched words
+" if not, specify [ set nohlsearch ]
+set hlsearch
+" use incremental search 
+" if not, specify [ set noincsearch ]
+set incsearch
+" show line number
+" if not, specify [ set nonumber ]
+" set number
+" Visualize break ( $ ) or tab ( ^I )
+" set list
+" highlights parentheses
+" set showmatch
+" show color display
+" if not, specify [ syntax off ]
+syntax on
+" change colors for comments if it's set [ syntax on ]
+highlight Comment ctermfg=LightCyan
+" wrap lines
+" if not, specify [ set nowrap ]
+set wrap
+EOF
+ 
 }
 
 #
@@ -201,8 +258,11 @@ EOF
 # set kernel parameters work
 sysctl -p
 }
+
 #main function
 main(){
+    add_user
+    repo_setup
     check_hosts
     set_timezone
     selinux
