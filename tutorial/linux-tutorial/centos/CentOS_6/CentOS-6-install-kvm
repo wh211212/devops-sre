@@ -1,0 +1,43 @@
+CentOS-6 install kvm
+
+# 1. Virtualization technology
+
+ grep -E 'svm|vmx' /proc/cpuinfo
+- vmx is for Intel processors
+- svm is for AMD processors
+
+# 2. Required RPMs
+
+yum install kvm python-virtinst libvirt libvirt-python virt-manager virt-viewer libguestfs-tools
+
+# 3. allow packet forwarding between interfaces
+sed -i 's/^\(net.ipv4.ip_forward =\).*/\1 1/' /etc/sysctl.conf; sysctl -p 
+
+# 4. 设置libvirtd服务自动引导，重启服务器
+chkconfig libvirtd on; shutdown -r now
+
+# 5. setup bridge
+chkconfig network on
+service network restart
+yum -y erase NetworkManager
+cp -p /etc/sysconfig/network-scripts/ifcfg-{em1,br0}
+sed -i -e'/HWADDR/d' -e'/UUID/d' -e's/em1/br0/' -e's/Ethernet/Bridge/' /etc/sysconfig/network-scripts/ifcfg-br0
+echo DELAY=0 >> /etc/sysconfig/network-scripts/ifcfg-br0
+echo 'BOOTPROTO="none"' >> /etc/sysconfig/network-scripts/ifcfg-em1
+echo BRIDGE=br0 >> /etc/sysconfig/network-scripts/ifcfg-em1
+service network restart
+brctl show
+
+# 
+
+ virt-install -d -n logstash -r 10240 --vcpus=4 --prompt --disk /dev/vg_xen1/aniu-co-1 --nographics -p -l http://mirrors.aliyun.com/centos/6.8/os/x86_64/ --extra-args="text console=com1 utf8 console=hvc0"
+
+# kvm check
+
+ virsh nodecpustats --percent
+
+
+
+
+
+

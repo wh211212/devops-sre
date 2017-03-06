@@ -53,7 +53,7 @@ check_hosts()
 repo_setup()
 {
   # add repo && set yum cache
-  # rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch
+  # rpm -ivh http://mirrors.aliyun.com/epel/6/x86_64/epel-release-6-8.noarch.rpm
   rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
   yum -y install centos-release-scl-rh centos-release-scl
   yum -y install yum-plugin-priorities
