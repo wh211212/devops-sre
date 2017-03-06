@@ -1,0 +1,5 @@
+# window-errors
+
+1. mstsc 内部错误
+
+管理员运行CMD,执行：netsh winsock reset
