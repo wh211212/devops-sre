@@ -6,7 +6,7 @@ flush privileges;
 
 SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
 
-GRANT ALL PRIVILEGES ON crm.* TO 'songchanghong'@'192.168.103.%' IDENTIFIED BY '0gOpwsRbqM3BPXzL9dnj';
+GRANT ALL PRIVILEGES ON tysx_s.* TO 'operation'@'localhost' IDENTIFIED BY 'operation123.';
 
 GRANT ALL PRIVILEGES ON aniu_cas.* TO 'aniu_cas'@'192.168.0.%' IDENTIFIED BY '0gOpwsRbqM3BPXzL9dnj';
 
