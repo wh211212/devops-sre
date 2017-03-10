@@ -53,7 +53,7 @@ check_hosts()
 repo_setup()
 {
   # add repo && set yum cache
-  # rpm -ivh http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch
+  # rpm -ivh http://mirrors.aliyun.com/epel/6/x86_64/epel-release-6-8.noarch.rpm
   rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
   yum -y install centos-release-scl-rh centos-release-scl
   yum -y install yum-plugin-priorities
@@ -171,8 +171,8 @@ sed -i 's/^HISTSIZE=.*$/HISTSIZE=1000/' /etc/profile
  
 # wrong password five times locked 180s
 
-sed -i '4a auth        required      pam_tally2.so deny=5 unlock_time=180' >> /etc/pam.d/system-auth
-sed -i 's#99999#180#' /etc/login.defs
+#sed -i '4a auth        required      pam_tally2.so deny=5 unlock_time=180' >> /etc/pam.d/system-auth
+#sed -i 's#99999#180#' /etc/login.defs
 
 # forbiden ctl-alt-delete
 sed -i 's/exec \/sbin\/shutdown -r now \"Control-Alt-Delete pressed"/\#exec \/sbin\/shutdown -r now \"Control-Alt-Delete pressed"/g' /etc/init/control-alt-delete.conf

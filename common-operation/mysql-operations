@@ -6,11 +6,14 @@ flush privileges;
 
 SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
 
-GRANT ALL PRIVILEGES ON crm.* TO 'songchanghong'@'192.168.103.%' IDENTIFIED BY '0gOpwsRbqM3BPXzL9dnj';
+GRANT ALL PRIVILEGES ON tysx_s.* TO 'operation'@'localhost' IDENTIFIED BY 'operation123.';
 
-GRANT ALL PRIVILEGES ON algo_quote.* TO 'algo_quote'@'192.168.103.%' IDENTIFIED BY 'R8neS90XVuuPQGdI6Rep';
+GRANT ALL PRIVILEGES ON aniu_cas.* TO 'aniu_cas'@'192.168.0.%' IDENTIFIED BY '0gOpwsRbqM3BPXzL9dnj';
 
 GRANT ALL PRIVILEGES ON nkb.* TO 'nkb'@'%' IDENTIFIED BY '211212';
+
+
+
 
 #导出
 
@@ -35,10 +38,6 @@ flush privileges;
 select * from table_name into outfile 'table_name.txt';
 
 DROP TEMPORARY TABLE IF EXISTS tmp_ts 
-
-
-
-
 
 bin/elasticsearch -Des.insecure.allow.root=true
 
@@ -93,21 +92,16 @@ awk -F\" '($2 ~ /\.(jpg|gif|png)/ && $4 !~ /^http:\/\/www\.aniu\.tv/) {print $4}
 # 与访问 IP 地址相关的命令
 
 统计共有多少个不同的 IP 访问：
-
 awk '{print $1}' aniu.tv.access.log | sort | uniq -c | sort -nr | head -10
 
 统计每一个 IP 访问了多少个页面：
-
 awk '{++S[$1]} END {for (a in S) print a,S[a]}' log_file
 
 将每个 IP 访问的页面数进行从小到大排序：
-
 awk '{++S[$1]} END {for (a in S) print S[a],a}' aniu.tv.access.log | sort -nr | less
 
 查看某一个 IP（例如 223.99.242.151 ）访问了哪些页面：
-
 egrep ^223.99.242.151 aniu.tv.access.log | awk '{print $1,$7}' | less
-
 
 
 
@@ -131,7 +125,6 @@ cat aniu.tv.access.log | awk '($10 > 20000){print $7}'| sort -n | uniq -c | sort
 
 
 #与页面响应时间相关的命令
-
 如果日志最后一列记录的是页面文件传输时间 (%T)，例如我们可以自定义日志格式为：
 LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %T" combined
 
@@ -144,27 +137,22 @@ awk '($NF > 5){print $0}' access.log | awk -F\" '{print $2}' |sort -n| uniq -c|s
 
 
 #svn
-
 cd /etc/subversion/
 htpasswd -m /etc/subversion/passwd wanfei
 
 
 # shell
-
 echo -e "\033[40;33m hello world \033[0m"
 
 
 #python 
-
 wget https://bootstrap.pypa.io/ez_setup.py -O - | python
 
 # ssh
 
 sed -i 's/#Port 22/Port 54077/' /etc/ssh/sshd_config && /etc/init.d/sshd restart
 
-
 # add user
-
 useradd shenjia && echo shenjia123. | passwd --stdin shenjia
 
 echo "shenjia ALL=(ALL) ALL" >> /etc/sudoers
