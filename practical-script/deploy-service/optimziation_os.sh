@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 #################################################
 #  --Info
 #         Initialization CentOS 6.x script
@@ -9,9 +9,9 @@
 #   Auther: hwang@aniu.tv
 #   Changelog:
 #   20170222   shaom   upgrade script
-################################################# 
+#################################################
 # Check if user is root
-# 
+#
 if [ $(id -u) != "0" ]; then
     echo "Error: You must be root to run this script, please use root to initialization OS"
     exit 1
@@ -33,7 +33,7 @@ add_user()
 
 #check host && network
 check_hosts()
-{   
+{
     hostname=`hostname`
     if grep -Eqi '^127.0.0.1[[:space:]]*localhost' /etc/hosts; then
         echo "Hosts: ok."
@@ -54,8 +54,8 @@ repo_setup()
 {
   # add repo && set yum cache
   # rpm -ivh http://mirrors.aliyun.com/epel/6/x86_64/epel-release-6-8.noarch.rpm
-  rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-  yum -y install centos-release-scl-rh centos-release-scl
+  #rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+  #yum -y install centos-release-scl-rh centos-release-scl
   yum -y install yum-plugin-priorities
   sed -i "s/keepcache=0/keepcache=1/g" /etc/yum.conf
 }
@@ -77,8 +77,8 @@ set_timezone()
 
 #update os
 update(){
-    yum -y update 
-# change yum source   
+    yum -y update
+# change yum source
 #    cd /etc/yum.repos.d/
 #    mkdir bak
 #    mv ./*.repo bak
@@ -121,13 +121,13 @@ EOF
 #Shut off system service
 
 stop_server()
-{ 
+{
      echo "stop not nessccery services!"
      for server in `chkconfig --list | grep 3:on | awk '{ print $1}'`
          do
            chkconfig --level 3 $server off
          done
- 
+
      for server in crond network rsyslog sshd lvm2-monitor sysstat netfs blk-availability udev-post
          do
            chkconfig --level 3 $server on
@@ -164,11 +164,11 @@ sed -i 's/^id:.*$/id:3:initdefault:/' /etc/inittab
 /sbin/init q
 # PS1
 #echo 'PS1="\[\e[37;40m\][\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[35;40m\]\W\[\e[0m\]]\\$ \[\e[33;40m\]"' >> /etc/profile
-echo "TMOUT=7200" >> /etc/profile 
+echo "TMOUT=7200" >> /etc/profile
 # Record command
 sed -i 's/^HISTSIZE=.*$/HISTSIZE=1000/' /etc/profile
 #echo "export PROMPT_COMMAND='{ msg=\$(history 1 | { read x y; echo \$y; });user=\$(whoami); echo \$(date \"+%Y-%m-%d %H:%M:%S\"):\$user:\`pwd\`/:\$msg ---- \$(who am i); } >> /tmp/\`hostname\`.\`whoami\`.history-timestamp'" >> /root/.bash_profile
- 
+
 # wrong password five times locked 180s
 
 #sed -i '4a auth        required      pam_tally2.so deny=5 unlock_time=180' >> /etc/pam.d/system-auth
@@ -183,7 +183,7 @@ source /etc/profile
 #
 delete_user()
 {
-# delete no use user 
+# delete no use user
 echo "delete not use user"
 echo ""
 #for user in adm lp sync shutdown halt uucp operator gopher ;do userdel $user ; done
@@ -216,7 +216,7 @@ set smartcase
 " highlights matched words
 " if not, specify [ set nohlsearch ]
 set hlsearch
-" use incremental search 
+" use incremental search
 " if not, specify [ set noincsearch ]
 set incsearch
 " show line number
@@ -235,7 +235,7 @@ highlight Comment ctermfg=LightCyan
 " if not, specify [ set nowrap ]
 set wrap
 EOF
- 
+
 }
 
 #
@@ -273,7 +273,7 @@ main(){
     iptables
     other
     delete_user
-#    sysctl_add   
+#    sysctl_add
 }
 # execute main functions
 main
