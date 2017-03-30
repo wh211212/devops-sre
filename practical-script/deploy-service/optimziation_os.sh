@@ -115,6 +115,7 @@ cat >> /etc/security/limits.conf <<EOF
 EOF
 #ulimit -n 8192
 #echo "ulimit -SHn 65535" >> /etc/rc.local
+# shell sed -i  '$ a fs.file-max = 65535'  /etc/sysctl.conf &&  sed -i 's/1024/65535/' /etc/security/limits.d/90-nproc.conf && sed -i '$ a* soft nofile 65535\n* hard nofile 65535' /etc/security/limits.conf
 }
 
 # ulimit -n 8192
