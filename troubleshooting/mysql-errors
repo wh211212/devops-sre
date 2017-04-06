@@ -1,0 +1,1 @@
+[ERROR] InnoDB: Failed to create check sector file, errno:13 Please confirm O_DIRECT is supported and remove the file /var/lib/check_sector_size if it exists.

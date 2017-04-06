@@ -69,6 +69,7 @@ yum repolist enabled | grep mysql
 sudo grep 'temporary password' /var/log/mysqld.log
 ```
 - 修改MySQL密码
+update mysql.user set authentication_string=password('@Aniuzabbix123.') where user='root' and Host ='127.0.0.1';
 
 > ALTER USER 'root'@'localhost' IDENTIFIED BY 'wQNROtCutvU8yOICpz81';
 > 这里建议使用强密码，MySQL初始密码设置等级较高，一般密码设置通不过验证
