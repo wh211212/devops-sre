@@ -57,6 +57,10 @@ Java, version 7 or higher
 wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.2.1/swagger-codegen-cli-2.2.1.jar
 
 
+wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.2.2/swagger-codegen-cli-2.2.2.jar -O swagger-codegen-cli.jar
+
+
+
 
 # 为开发环境设置Swagger UI
 
@@ -81,6 +85,12 @@ swagger-editor
 
 从swagger-api GitHub资料库下载Swagger UI工具
 网址为：https：//github.com/swagger-api/swagger-ui。 注意：确保下载的Swagger UI版本与Swagger Spec 2.0兼容,因为这是Rest应用程序生成的Swagger规范版本。
+
+git clone https://github.com/swagger-api/swagger-ui.git
+
+##
+
+
 
 
 ## 使用Swagger UI
