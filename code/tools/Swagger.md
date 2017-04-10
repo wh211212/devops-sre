@@ -59,6 +59,10 @@ wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-c
 
 wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.2.2/swagger-codegen-cli-2.2.2.jar -O swagger-codegen-cli.jar
 
+mvn clean package
+
+
+
 
 
 
