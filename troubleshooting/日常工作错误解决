@@ -20,7 +20,7 @@ show procedure status;
 
 方法二：
 
-  show procedure status; //存储过程
+show procedure status; //存储过程
 
  show function status;     //函数
 
