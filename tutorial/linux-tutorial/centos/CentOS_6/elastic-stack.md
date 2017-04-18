@@ -302,6 +302,8 @@ bin/logstash-plugin install x-pack
 
 ```
 sudo yum install logstash
+sudo /etc/init.d/logstash start
+sudo /etc/init.d/logstash stop
 ```
 
 - logstash工作原理
@@ -320,3 +322,110 @@ bin/logstash -e 'input { stdin { } } output { stdout {} }'
 ### 使用logstash解析日志
 
 ### 配置Filebeat发送日志行到Logstash
+
+- first-pipeline.conf
+
+```
+input {
+    beats {
+        port => "5043"
+    }
+}
+ filter {
+    grok {
+        match => { "message" => "%{COMBINEDAPACHELOG}"}
+    }
+    geoip {
+        source => "clientip"
+    }
+}
+output {
+    elasticsearch {
+        hosts => [ "localhost:9200" ]
+    }
+}
+```
+
+- 测试pipeline
+
+> Logstash管道配置为将数据索引到Elasticsearch集群
+
+```
+curl -XGET 'localhost:9200/logstash-$DATE/_search?pretty&q=response=200'
+#
+curl -XGET 'localhost:9200/logstash-$DATE/_search?pretty&q=geoip.city_name=Buffalo'
+```
+
+### 拼接多个输入和输出插件
+
+### logstash如何工作
+
+- Inputs
+
+> Logstash事件处理流水线有三个阶段：输入→过滤→输出。输入产生的事件，过滤器修改，然后输出把它们运别处。输入和输出的编解码器支持，使您可以编码或当它进入或退出管道，而无需使用单独的过滤器对数据进行解码:file,syslog,redis,filebeat
+> 关可用输入的更多信息，请参阅[输入插件](https://www.elastic.co/guide/en/logstash/5.3/input-plugins.html)
+
+- Filters
+
+> 过滤器是Logstash管道中的中间处理设备。您可以将过滤器与条件组合，以便在符合特定条件的情况下对事件执行操作。一些有用的过滤器包括:
+> grok,mutate,drop,clone,geoip
+> 有关可用过滤器的更多信息，请参阅[过滤器插件](https://www.elastic.co/guide/en/logstash/5.3/filter-plugins.html)。
+
+- Outputs
+
+> 输出是Logstash管道的最后阶段。一个事件可以通过多个输出，但一旦所有的输出处理完成，事件就已完成执行。一些常用的输出包括：
+> elasticsearch,file,graphite,statsd
+> 有关可用输出的更多信息，请参阅[输出插件](https://www.elastic.co/guide/en/logstash/5.3/output-plugins.html)
+
+- Codecs
+
+> 编解码器基本上是可以作为输入或输出的一部分运行的流过滤器。编解码器使您可以轻松地将邮件的传输与序列化过程分开。流行的编解码器包括json，msgpack和plain（text）
+> json,multiline
+> 有关可用编解码器的更多信息，请参阅[编解码器插件](https://www.elastic.co/guide/en/logstash/5.3/codec-plugins.html)
+
+### Logstash 配置
+
+- log
+
+```
+# log path
+--path.logs
+# slowlog
+slowlog.threshold.warn: 2s
+slowlog.threshold.info: 1s
+slowlog.threshold.debug: 500ms
+slowlog.threshold.trace: 100ms
+#
+GET /_node/logging?pretty
+```
+
+### 持久性队列的工作原理
+
+> input → queue → filter + output
+
+## 安装beats
+
+> 每个Beat是一个可单独安装的产品。使用Beat快速启动并运行，请参阅“Beat”的“入门指南”信息：
+
+- Filebeat安装前提
+
+> 要使用自己的Filebeat设置，需要安装和配置： 弹性搜索用于存储和索引数据。 Kibana的UI。 Logstash（可选）用于将数据插入到Elasticsearch中。
+
+- 安装Filebeat
+
+```
+# 使用elk repo
+sudo yum install filebeat
+sudo chkconfig --add filebeat
+```
+- 配置filebeat
+
+> 配置参考如下：
+
+```
+```
+
+- 配置filebeat使用logstash
+
+> 先决条件：要使用Logstash作为输出，还必须设置Logstash以接收Beats的事件。
+> 如果你想使用Logstash对由Filebeat收集的数据进行额外的处理，则需要Filebeat配置为使用Logstash。 要做到这一点，您可以编辑Filebeat配置文件，通过注释掉它通过取消注释logstash部分禁用Elasticsearch输出并启用Logstash输出：

@@ -22,7 +22,7 @@ yum localinstall mysql57-community-release-el6-n.noarch.rpm -y # 安装
 yum repolist all | grep mysql
 ```
 
-## 配置MySQL源  
+## 配置MySQL源
 ```
 # 这些貌似不需要配置
 # for mysql57-community
@@ -47,6 +47,8 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 EOF
 ```
+
+> 注：可以把gpgcheck=1改为gpgcheck=0，即可不验证key文件
 
 ###
 
