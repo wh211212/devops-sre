@@ -21,7 +21,7 @@
 ## 安装JDK
 
 ```
-yum install java-1.8.0-openjdk -y
+yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel -y
 echo -e 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk.x86_64 \nexport CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar \nexport PATH=$PATH:$JAVA_HOME/bin' > >> /etc/profile
 source /etc/profile
 ```
@@ -105,7 +105,7 @@ egrep -v "^#|^$" /etc/elasticsearch/elasticsearch.yml
   cluster.name: logging-prod
   node.name: prod-elk-1 or ${HOSTNAME}
   bootstrap.memory_lock: true #禁用交换
-  network.host: 192.168.0.51
+  network.host: 192.168.10.51
   discovery.zen.ping.unicast.hosts:
    - 192.168.1.10:9300 # 指定端口
    - 192.168.1.11 # 不指定情况下默认为transport.profiles.default.port且会fallback to transport.tcp.port
@@ -419,6 +419,8 @@ sudo yum install filebeat
 sudo chkconfig --add filebeat
 ```
 - 配置filebeat
+
+> /etc/filebeat/filebeat.yml
 
 > 配置参考如下：
 
