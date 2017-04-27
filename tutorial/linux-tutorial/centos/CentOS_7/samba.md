@@ -89,3 +89,7 @@ Retype new SMB password:     # confirm
 Added user cent.
 [root@linuxprobe ~]# usermod -G yunwei wh
 ```
+samba 提示Failed to initialize the registry: WERR_CAN_NOT_COMPLETE 无法启动
+[root@glusterfs-node-1 samba]# find / -name registry.tdb
+/var/lib/samba/registry.tdb
+[root@glusterfs-node-1 samba]# rm -rf /var/lib/samba/registry.tdb

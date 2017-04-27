@@ -17,13 +17,21 @@ GRANT ALL PRIVILEGES ON nkb.* TO 'nkb'@'%' IDENTIFIED BY '211212';
 aniu_message aniu_salesman_user aniu_message_yx aniu_user_majia 
 
 #
+change master to master_host='192.168.1.136', master_user='mysync', master_password='password',master_log_file='mysqld-bin.000001', master_log_pos=120;
+
+change master to master_log_file='mysqld-bin.000001', master_log_pos=120;
 
 
-GRANT ALL PRIVILEGES ON tysx_s.aniu_message_yx TO 'wangfei'@'192.168.103.%' IDENTIFIED BY 'wangfei123.';
-GRANT ALL PRIVILEGES ON tysx_s.aniu_salesman_user TO 'wangfei'@'192.168.103.%' IDENTIFIED BY 'wangfei123.';
-GRANT ALL PRIVILEGES ON tysx_s.aniu_user_majia TO 'wangfei'@'192.168.103.%' IDENTIFIED BY 'wangfei123.';
+
+GRANT ALL PRIVILEGES ON jumpserver.* TO 'jumpserver'@'192.168.%' IDENTIFIED BY '@Aniujumpserver..0';
 
 
+
+
+GRANT ALL PRIVILEGES ON tysx_s.aniu_salesman_user TO 'wangfei'@'192.168.0.%' IDENTIFIED BY 'wangfei123.';
+GRANT ALL PRIVILEGES ON tysx_s.aniu_user_majia TO 'wangfei'@'192.168.0.%' IDENTIFIED BY 'wangfei123.';
+
+GRANT ALL PRIVILEGES ON jumpserver.* TO ‘jumpserver’@’192.168.%’ IDENTIFIED BY ‘jumpserver’; 
 
 
 aniu_message_channel
@@ -32,13 +40,13 @@ aniu_message_channel
 
 crshen / eoswkdtlstjddlf
 
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY '123456';
+GRANT all privileges ON jumpserver.* from 'jumpserver'@'192.168.1.%' IDENTIFIED BY 'jumpserver';
 
 175.102.133.%
 
  WITH GRANT OPTION 
 
-revoke all privileges ON *.* from 'guodepei'@'175.102.133.%';
+revoke all privileges ON jumpserver.* from 'jumpserver'@'192.168.1.%';
 
 
 delete from mysql.user where user="wangfei" and host="192.168.103.%";

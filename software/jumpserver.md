@@ -37,7 +37,7 @@ cd jumpserver/install/
 
 # 不使用本地数据需执行以下操作
 
-GRANT ALL PRIVILEGES ON jumpserver.* TO 'jumpserver'@'192.168.1.%' IDENTIFIED BY 'jumpserver';
+GRANT ALL PRIVILEGES ON jumpserver.* TO 'jumpserver'@'192.168.%' IDENTIFIED BY '@Aniujumpserver123.';
 flush privileges;
 
 > 邮箱地址设置：
