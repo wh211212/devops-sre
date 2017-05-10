@@ -93,3 +93,5 @@ samba 提示Failed to initialize the registry: WERR_CAN_NOT_COMPLETE 无法启�
 [root@glusterfs-node-1 samba]# find / -name registry.tdb
 /var/lib/samba/registry.tdb
 [root@glusterfs-node-1 samba]# rm -rf /var/lib/samba/registry.tdb
+
+# smbd_open_one_socket: open_socket_in: Address family not supported by protocol

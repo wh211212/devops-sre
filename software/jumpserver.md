@@ -38,6 +38,8 @@ cd jumpserver/install/
 # 不使用本地数据需执行以下操作
 
 GRANT ALL PRIVILEGES ON jumpserver.* TO 'jumpserver'@'192.168.%' IDENTIFIED BY '@Aniujumpserver123.';
+
+GRANT ALL PRIVILEGES ON jumpserver.* TO 'jumpserver'@'127.0.0.1' IDENTIFIED BY '@Aniujumpserver123.';
 flush privileges;
 
 > 邮箱地址设置：
@@ -53,3 +55,6 @@ flush privileges;
 # jumpserver使用
 
 >　https://github.com/jumpserver/jumpserver/wiki/%E5%BA%94%E7%94%A8%E5%9B%BE%E8%A7%A3
+
+daemon python /opt/jumpserver/run_server.py &> /dev/null 2>&1 &
+python /opt/jumpserver/run_server.py &>> /var/log/jumpserver.log 2>&1
