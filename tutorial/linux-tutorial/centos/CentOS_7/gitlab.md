@@ -51,5 +51,8 @@ sudo gitlab-ctl reconfigure
 - 使用浏览器访问GitLab
 
 > 首次访问GitLab,系统会让你重新设置管理员的密码,设置成功后会返回登录界面.默认的管理员账号是root,如果你想更改默认管理员账号,请输入上面设置的新密码登录系统后修改帐号名.
+> 
+ Username: root
+Password: 5iveL!fe
 
 # Gitlab 配置
