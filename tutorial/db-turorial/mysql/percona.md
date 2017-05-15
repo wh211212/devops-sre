@@ -13,7 +13,8 @@
 
 - 下图说明了PMM当前的结构：
 
-[percona-diagram](https://www.percona.com/doc/percona-monitoring-and-management/_images/pmm-diagram.png)
+![这里写图片描述](https://www.percona.com/doc/percona-monitoring-and-management/_images/pmm-diagram.png)
+
 
 ## PMM Client
 
@@ -111,7 +112,40 @@ docker create \
 
 ```
 docker run -d \
-   -p 80:80 \
+   -p 666:80 \
+   --volumes-from pmm-data \
+   --name pmm-server \
+   --restart always \
+   percona/pmm-server:1.1.3
+```
+
+> 注意：这里666端口是自定义的，因为笔者实验机80已被占用
+
+#### 确认PMM 安装运行是否正确
+
+> 通过使用运行容器的主机的IP地址连接到PMM Web界面来验证PMM服务器是否正在运行，然后在要监视的所有数据库主机上安装PMM Client
+|Component|URL|
+|-------  |---|
+|PMM landing page|http://192.168.0.99:port|
+|Query Analytics (QAN web app)|http://192.168.0.99/qan/|
+|Metrics Monitor (Grafana)|http://192.168.0.99/graph/User name: admin Password: admin|
+|Orchestrator|http://192.168.0.99/orchestrator|
+
+### 删除PMM服务器
+
+> 在停止和删除PMM服务器之前，请确保相关的PMM客户端不通过删除所有监视的实例来收集任何数据，如删除监控服务中所述。
+
+```
+docker stop pmm-server && docker rm pmm-server
+docker rm pmm-data # 删除pmm数据容器
+```
+### 升级PMM服务器
+
+```
+docker stop pmm-server  # 先停
+docker rm pmm-server    # 再删，如果如要保留收集数据，不要执行此操作
+docker run -d \
+   -p 999:80 \
    --volumes-from pmm-data \
    --name pmm-server \
    --restart always \
@@ -119,28 +153,15 @@ docker run -d \
    percona/pmm-server:1.1.3
 ```
 
-#### 确认PMM 安装运行是否正确
-
-> 通过使用运行容器的主机的IP地址连接到PMM Web界面来验证PMM服务器是否正在运行，然后在要监视的所有数据库主机上安装PMM Client
-|Component|URL|
-|-------  |---|
-|PMM landing page|http://192.168.100.1:port|
-|Query Analytics (QAN web app)|http://192.168.100.1/qan/|
-|Metrics Monitor (Grafana)|http://192.168.100.1/graph/User name: admin Password: admin|
-|Orchestrator|http://192.168.100.1/orchestrator|
-
-
-
-
-
-
 
 # 在Red Hat和CentOS上安装PMM客户端
 
-> 如果您正在运行基于RPM的Linux发行版，请使用yum软件包管理器从Percona官方软件仓库安装PMM Client。 Percona为64位版本的Red Hat Enterprise Linux 6（圣地亚哥）和7（Maipo）提供了.rpm包，其包括其完全二进制兼容性的衍生产品，如CentOS，Oracle Linux，Amazon Linux AMI等。
+> PMM客户端是安装在您要监视的MySQL或MongoDB主机上的一组代理和出口商。 组件收集关于一般系统和数据库性能的各种数据，并将该数据发送到相应的PMM服务器组件。
+> 注：不应该在具有相同主机名的数据库服务器上安装代理，因为PMM服务器使用主机名来标识收集的数据。
 
-## 安装PMM 客户端
+## 安装PMM客户端
 
+> PMM客户端应该运行在任何现代的Linux发行版上，但是Percona提供的PMM客户端软件包只能从最受欢迎的Linux发行版的软件仓库进行自动安装：
 - 系统事先无percona的yum源，需要新增
 
 ```
@@ -152,3 +173,116 @@ sudo yum install https://www.percona.com/redir/downloads/percona-release/redhat/
 ```
 sudo yum install pmm-client -y
 ```
+
+#### 将PMM客户端连接到PMM服务器
+
+> 使用pmm-admin config --help，查看帮助
+
+```
+[root@backup-server ~]# sudo pmm-admin config --server 192.168.0.99:666
+OK, PMM server is alive.
+
+PMM Server      | 192.168.0.99:666
+Client Name     | backup-server
+Client Address  | 192.168.0.47
+```
+
+#### 开始数据收集
+
+> 将客户端连接到PMM服务器后，通过添加监控服务，从数据库实例启用数据收集。
+要启用一般系统度量，MySQL指标和查询分析，请运行：
+
+
+
+#### 管理PMM客户端
+
+```
+# 添加监控服务
+pmm-admin add
+# 检查PMM客户端和PMM服务器之间的网络连接。
+pmm-admin check-network
+# 配置PMM Client如何与PMM服务器通信。
+pmm-admin config
+# 打印任何命令和退出的帮助
+pmm-admin help
+# 打印有关PMM客户端的信息
+pmm-admin info
+# 出为此PMM客户端添加的所有监控服务
+pmm-admin list
+# 检查PMM服务器是否存活
+pmm-admin ping
+# 检查PMM服务器是否存活。
+pmm-admin purge
+# 清除PMM服务器上的度量数据
+pmm-admin remove, pmm-admin rm
+# 删除监控服务
+pmm-admin repair
+# 重启pmm
+pmm-admin restart
+# 打印PMM Client使用的密码
+pmm-admin show-passwords
+# 开启监控服务
+pmm-admin start
+# 停止监控服务
+pmm-admin stop
+# 在卸载之前清理PMM Client
+pmm-admin uninstall
+```
+
+- 添加MySQL查询分析服务
+
+> 默认情况下不存在初始的被pmm-client使用的mysql用户，需要自己创建，笔者是登录到mysql中创建的用户，感兴趣的同学可以使用pmm-admin提供的参数创建默认用户
+
+```
+GRANT ALL PRIVILEGES ON *.* TO 'pmm'@'192.168.0.47' IDENTIFIED BY 'pmmpassword';
+# 创建用户成功
+[root@backup-server ~]# sudo pmm-admin add mysql:metrics --user pmm --password pmmpassword --host 192.168.0.47
+# 使用创建的用户添加监控mysql服务
+OK, now monitoring MySQL metrics using DSN pmm:***@tcp(192.168.0.47:3306)
+[root@backup-server ~]# sudo pmm-admin add mysql:queries --user pmm --password pmmpassword --host 192.168.0.47
+```
+
+- 查看当前服务器监控的服务
+
+```
+[root@backup-server ~]# pmm-admin list
+pmm-admin 1.1.3
+
+PMM Server      | 192.168.0.99:666
+Client Name     | backup-server
+Client Address  | 192.168.0.47
+Service Manager | unix-systemv
+
+-------------- -------------- ----------- -------- ------------------------------- ------------------------------------------
+SERVICE TYPE   NAME           LOCAL PORT  RUNNING  DATA SOURCE                     OPTIONS
+-------------- -------------- ----------- -------- ------------------------------- ------------------------------------------
+mysql:queries  backup-server  -           YES      pmm:***@tcp(192.168.0.47:3306)  query_source=slowlog, query_examples=true
+linux:metrics  backup-server  42000       YES      -
+mysql:metrics  backup-server  42002       YES      pmm:***@tcp(192.168.0.47:3306)  tablestats=OFF
+```
+
+#### 报错排查
+
+> QAN API error: "qh.Profile: No query classes for selected instance and time range. Please check whether your MySQL settings match the recommended.".Check the /var/log/qan-api.log file in docker container for more information
+
+```
+# mysql 开启慢日志查询
+yum install percona-toolkit -y  # 建议安装
+#
+slow_query_log = 1
+long_query_time = 2
+# 重启mysql(mysql5.6)
+/etc/init.d/mysql restart
+```
+
+> 继续访问http://192.168.0.99:666，查看监控mysql的状态
+
+![这里写图片描述](http://img.blog.csdn.net/20170515194213493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2gyMTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![这里写图片描述](http://img.blog.csdn.net/20170515194236727?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2gyMTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![这里写图片描述](http://img.blog.csdn.net/20170515194325727?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2gyMTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+> 后续补充监控MongoDB的教程。。。
+
+- 参考链接：https://www.percona.com/software/database-tools/percona-monitoring-and-management
