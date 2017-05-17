@@ -235,7 +235,10 @@ pmm-admin uninstall
 
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'pmm'@'192.168.0.47' IDENTIFIED BY 'pmmpassword';
+flush privileges;
 # 创建用户成功
+
+[root@backup-server ~]#sudo pmm-admin config --server 192.168.0.99:666
 [root@backup-server ~]# sudo pmm-admin add mysql:metrics --user pmm --password pmmpassword --host 192.168.0.47
 # 使用创建的用户添加监控mysql服务
 OK, now monitoring MySQL metrics using DSN pmm:***@tcp(192.168.0.47:3306)
