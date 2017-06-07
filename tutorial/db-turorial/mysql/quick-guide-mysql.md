@@ -48,6 +48,9 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 EOF
 ```
 
+
+yum install mysql-community-embedded  mysql-community-server  mysql-community-devel mysql-community-client
+
 > 注：可以把gpgcheck=1改为gpgcheck=0，即可不验证key文件
 
 ###

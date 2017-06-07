@@ -57,4 +57,6 @@ flush privileges;
 >　https://github.com/jumpserver/jumpserver/wiki/%E5%BA%94%E7%94%A8%E5%9B%BE%E8%A7%A3
 
 daemon python /opt/jumpserver/run_server.py &> /dev/null 2>&1 &
+
+
 python /opt/jumpserver/run_server.py &>> /var/log/jumpserver.log 2>&1
