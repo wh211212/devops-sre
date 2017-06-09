@@ -35,3 +35,7 @@
 
 ## kobe words
 No matter what , just do not give up .Always believe that your dream can come true & just keep working for what you want to achieve.
+
+# svn git
+
+# java + php + ios + andriod
